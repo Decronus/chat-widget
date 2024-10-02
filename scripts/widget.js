@@ -22,14 +22,14 @@ function closeChat() {
 }
 
 async function initWidget() {
-    // async function loadWidgetHTML() {
-    //     const response = await fetch(widgetHTMLEndpoint);
-    //     const widgetHtml = await response.text();
-    //     body.innerHTML = widgetHtml;
-    //     console.log(widgetHtml);
-    // }
-    //
-    // await loadWidgetHTML();
+    async function loadWidgetHTML() {
+        const response = await fetch(widgetHTMLEndpoint);
+        const widgetHtml = await response.text();
+        body.innerHTML = widgetHtml;
+        console.log(widgetHtml);
+    }
+
+    await loadWidgetHTML();
 
     widgetWrap = document.getElementById('chat-widget__wrap');
     chat = widgetWrap?.querySelector('.chat');
