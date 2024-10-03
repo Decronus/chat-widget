@@ -42,15 +42,14 @@
   opacity: 1;
 }
 #chat-widget__wrap .chat-widget .chat.is-hidden {
-  height: 0;
-  width: 0;
+  transform: scale(0);
+  transform-origin: 100% 100%;
   opacity: 0;
 }
 #chat-widget__wrap .chat-widget .chat .chat__header {
-  height: 221px;
+  height: 174px;
   width: 100%;
   background: #5C59E8;
-  border-radius: 0 0 24px 24px;
   position: relative;
   z-index: 10;
   padding: 50px 32px 30px;
@@ -59,10 +58,60 @@
   display: flex;
   padding: 12px 15px;
   position: relative;
-  flex-grow: 1;
+  height: 100%;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body .chat__body-footer {
+#chat-widget__wrap .chat-widget .chat .chat__body .chat__body-overlay {
+  height: 47px;
   width: 100%;
+  background: #5C59E8;
+  border-radius: 0 0 24px 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list {
+  margin-top: 67px;
+  margin-bottom: 24px;
+  flex-grow: 1;
+  overflow: auto;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list > div {
+  border-bottom: 1px solid #F2F2F2;
+  padding-bottom: 16px;
+}
+#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+}
+#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data .chat__conversations-last-message {
+  font-size: 15px;
+  font-weight: 400;
+}
+#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data .chat__conversations-info {
+  font-size: 15px;
+  font-weight: 400;
+  color: #667085;
+}
+#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .button {
   align-self: flex-end;
 }
 #chat-widget__wrap .chat-widget .close-chat-button {
