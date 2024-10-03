@@ -14,6 +14,11 @@
   font-weight: 600;
   line-height: 41px;
 }
+#chat-widget__wrap h3 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+}
 #chat-widget__wrap h1 {
   color: #F8F8F8;
 }
@@ -46,7 +51,15 @@
   transform-origin: 100% 100%;
   opacity: 0;
 }
-#chat-widget__wrap .chat-widget .chat .chat__header {
+#chat-widget__wrap .chat-widget .chat .chat__main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main.is-hidden {
+  display: none;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__header {
   height: 174px;
   width: 100%;
   background: #5C59E8;
@@ -54,13 +67,12 @@
   z-index: 10;
   padding: 50px 32px 30px;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body {
   display: flex;
-  padding: 12px 15px;
   position: relative;
-  height: 100%;
+  flex-grow: 1;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body .chat__body-overlay {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__body-overlay {
   height: 47px;
   width: 100%;
   background: #5C59E8;
@@ -69,14 +81,112 @@
   top: 0;
   left: 0;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block {
+  padding: 0 20px 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  z-index: 20;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block.is-hidden {
+  display: none;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-header {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 22px 24px;
+  border: 1px solid #DBDBDB;
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.1019607843);
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-header .chat__questions-header-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-header h3 {
+  color: #5C59E8;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-header svg {
+  cursor: pointer;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-content {
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #DBDBDB;
+  background: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.1019607843);
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-content .chat__questions-input-wrap {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-content .chat__questions-input-wrap .chat__questions-search-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  background: #F2F2F2;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-content .chat__questions-input-wrap .chat__questions-input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 12px;
+  background: #F2F2F2;
+  border-radius: 6px;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-content .chat__questions-input-wrap .chat__questions-input::placeholder {
+  color: #000000;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-content .chat__questions-list {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 12px;
+  overflow: auto;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__questions-block .chat__questions-content .chat__questions-list .chat__questions-list-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 14px;
+  cursor: pointer;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block {
+  padding: 12px 15px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block.is-hidden {
+  display: none;
+}
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list {
   margin-top: 67px;
   margin-bottom: 24px;
   flex-grow: 1;
@@ -86,33 +196,42 @@
   flex-direction: column;
   gap: 16px;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list > div {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list > div {
   border-bottom: 1px solid #F2F2F2;
   padding-bottom: 16px;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 4px;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data .chat__conversations-last-message {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data .chat__conversations-last-message {
   font-size: 15px;
   font-weight: 400;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data .chat__conversations-info {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data .chat__conversations-info {
   font-size: 15px;
   font-weight: 400;
   color: #667085;
 }
-#chat-widget__wrap .chat-widget .chat .chat__body .chat__conversations-block .button {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .button {
   align-self: flex-end;
+}
+#chat-widget__wrap .chat-widget .chat .chat__conversation.is-hidden {
+  display: none;
+}
+#chat-widget__wrap .chat-widget .chat .chat__conversation .chat__conversation-header {
+  height: 80px;
+  width: 100%;
+  background: #5C59E8;
+  padding: 0 20px;
 }
 #chat-widget__wrap .chat-widget .close-chat-button {
   display: none;
