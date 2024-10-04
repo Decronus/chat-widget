@@ -13,8 +13,25 @@ function leftArrow(onclick = undefined) {
 
 function leftArrow2(onclick = undefined) {
     return `
-    <svg onclick="${onclick}" width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg onclick="${onclick}" style="cursor: pointer" width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0.304688 8.25L0.902344 7.65234L7.65234 0.902344L8.25 0.304688L9.41016 1.5L8.84766 2.09766L2.66016 8.25L8.84766 14.4023L9.44531 15L8.25 16.1953L7.65234 15.5977L0.902344 8.84766L0.304688 8.25Z" fill="#F8F8F8"/>
+    </svg>`
+}
+
+function scrapIcon(onclick = undefined) {
+    return `
+    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14.3862 5.06294C14.6916 4.78305 14.7122 4.30862 14.4323 4.00328C14.1524 3.69794 13.678 3.67732 13.3726 3.95721L4.86728 11.7538C2.66272 13.7746 2.65669 17.2482 4.85422 19.2767C6.84029 21.11 9.91042 21.08 11.8602 19.2082L19.8467 11.5411C21.0047 10.4295 21.0933 8.60715 20.0486 7.3884C18.9014 6.0499 16.8574 5.97141 15.6109 7.21797L9.84909 12.9797C9.5562 13.2726 9.5562 13.7475 9.84909 14.0404C10.142 14.3333 10.6169 14.3333 10.9097 14.0404L16.6715 8.27863C17.3002 7.64991 18.3311 7.6895 18.9098 8.36458C19.4366 8.97927 19.3919 9.89839 18.8079 10.4591L10.8214 18.1261C9.44388 19.4485 7.27481 19.4698 5.87164 18.1745C4.31907 16.7414 4.32333 14.2872 5.88087 12.8595L14.3862 5.06294Z" fill="#667085"/>
+    </svg>`
+}
+
+function smileIcon(onclick = undefined) {
+    return `
+    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.66459 13.5292C6.03294 13.345 6.4804 13.4924 6.6676 13.8582L6.66912 13.861C6.67225 13.8667 6.67912 13.8789 6.68992 13.8967C6.71157 13.9324 6.74876 13.99 6.80313 14.0625C6.91211 14.2078 7.08796 14.4099 7.34352 14.6144C7.84512 15.0156 8.68219 15.45 10 15.45C11.3178 15.45 12.1549 15.0156 12.6565 14.6144C12.912 14.4099 13.0879 14.2078 13.1969 14.0625C13.2512 13.99 13.2884 13.9324 13.3101 13.8967C13.3209 13.8789 13.3277 13.8667 13.3309 13.861L13.3324 13.8582C13.5196 13.4924 13.9671 13.345 14.3354 13.5292C14.7059 13.7144 14.8561 14.1649 14.6708 14.5354L14 14.2C14.6708 14.5354 14.671 14.535 14.6708 14.5354L14.67 14.5371L14.669 14.5389L14.6669 14.5432L14.6613 14.554C14.6571 14.5621 14.6517 14.5721 14.6452 14.5839C14.6322 14.6075 14.6147 14.6383 14.5923 14.6752C14.5475 14.7489 14.4831 14.8475 14.3969 14.9625C14.2246 15.1922 13.963 15.4901 13.5935 15.7857C12.8451 16.3844 11.6822 16.95 10 16.95C8.31781 16.95 7.15488 16.3844 6.40648 15.7857C6.03704 15.4901 5.77539 15.1922 5.60313 14.9625C5.51687 14.8475 5.4525 14.7489 5.40774 14.6752C5.38534 14.6383 5.36778 14.6075 5.3548 14.5839L5.34539 14.5666L5.33869 14.554L5.33313 14.5432L5.33095 14.5389L5.33002 14.5371C5.32981 14.5367 5.32918 14.5354 6 14.2L5.32918 14.5354C5.14394 14.1649 5.29411 13.7144 5.66459 13.5292Z" fill="#667085"/>
+        <path d="M8 7.70001C8 8.52844 7.32843 9.20001 6.5 9.20001C5.67157 9.20001 5 8.52844 5 7.70001C5 6.87158 5.67157 6.20001 6.5 6.20001C7.32843 6.20001 8 6.87158 8 7.70001Z" fill="#667085"/>
+        <path d="M13.5 9.20001C14.3284 9.20001 15 8.52844 15 7.70001C15 6.87158 14.3284 6.20001 13.5 6.20001C12.6716 6.20001 12 6.87158 12 7.70001C12 8.52844 12.6716 9.20001 13.5 9.20001Z" fill="#667085"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M20 10.2C20 15.7229 15.5228 20.2 10 20.2C4.47715 20.2 0 15.7229 0 10.2C0 4.67716 4.47715 0.200012 10 0.200012C15.5228 0.200012 20 4.67716 20 10.2ZM18.5 10.2C18.5 14.8944 14.6944 18.7 10 18.7C5.30558 18.7 1.5 14.8944 1.5 10.2C1.5 5.50559 5.30558 1.70001 10 1.70001C14.6944 1.70001 18.5 5.50559 18.5 10.2Z" fill="#667085"/>
     </svg>`
 }
 
@@ -26,6 +43,14 @@ const unreadIcon = `
 const searchIcon = `
     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11.375 6.4375C11.375 7.69531 10.9648 8.87109 10.2812 9.80078L13.7266 13.2734C14.082 13.6016 14.082 14.1758 13.7266 14.5039C13.3984 14.8594 12.8242 14.8594 12.4961 14.5039L9.02344 11.0312C8.09375 11.7422 6.91797 12.125 5.6875 12.125C2.54297 12.125 0 9.58203 0 6.4375C0 3.32031 2.54297 0.75 5.6875 0.75C8.80469 0.75 11.375 3.32031 11.375 6.4375ZM5.6875 10.375C7.08203 10.375 8.36719 9.63672 9.07812 8.40625C9.78906 7.20312 9.78906 5.69922 9.07812 4.46875C8.36719 3.26562 7.08203 2.5 5.6875 2.5C4.26562 2.5 2.98047 3.26562 2.26953 4.46875C1.55859 5.69922 1.55859 7.20312 2.26953 8.40625C2.98047 9.63672 4.26562 10.375 5.6875 10.375Z" fill="#3047EC"/>
+    </svg>`
+
+const robotIcon = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.5 14C9.32843 14 10 13.3284 10 12.5C10 11.6715 9.32843 11 8.5 11C7.67157 11 7 11.6715 7 12.5C7 13.3284 7.67157 14 8.5 14Z" fill="white"/>
+        <path d="M17 12.5C17 13.3284 16.3284 14 15.5 14C14.6716 14 14 13.3284 14 12.5C14 11.6715 14.6716 11 15.5 11C16.3284 11 17 11.6715 17 12.5Z" fill="white"/>
+        <path d="M9.32918 15.6645C9.51442 15.2941 9.96493 15.1439 10.3354 15.3291L10.5466 15.4347C11.4615 15.8922 12.5385 15.8922 13.4534 15.4347L13.6646 15.3291C14.0351 15.1439 14.4856 15.2941 14.6708 15.6645C14.8561 16.035 14.7059 16.4855 14.3354 16.6708L14.1243 16.7763C12.787 17.445 11.213 17.445 9.87574 16.7763L9.66459 16.6708C9.29411 16.4855 9.14394 16.035 9.32918 15.6645Z" fill="white"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6964 2.7785C15.8502 2.39391 15.6631 1.95743 15.2785 1.8036C14.894 1.64976 14.4575 1.83682 14.3036 2.22141L13.6654 3.8171C13.662 3.82543 13.6586 3.82935 13.6558 3.8319C13.6522 3.83513 13.6468 3.83846 13.6399 3.84061C13.633 3.84276 13.6267 3.84304 13.6219 3.84241C13.6182 3.8419 13.6131 3.84063 13.6056 3.83565C12.8739 3.34783 11.8829 3.57067 11.4305 4.32478L10.4254 5.99996H9C7.13623 5.99996 6.20435 5.99996 5.46927 6.30444C4.48915 6.71041 3.71046 7.48911 3.30448 8.46922C3 9.20431 3 10.1362 3 12C3 14.7956 3 16.1934 3.45672 17.2961C4.06569 18.7662 5.23373 19.9343 6.7039 20.5432C7.80653 21 9.20435 21 12 21C14.7956 21 16.1935 21 17.2961 20.5432C18.7663 19.9343 19.9343 18.7662 20.5433 17.2961C21 16.1934 21 14.7956 21 12C21 10.1362 21 9.20431 20.6955 8.46922C20.2895 7.48911 19.5108 6.71041 18.5307 6.30444C17.7956 5.99996 16.8638 5.99996 15 5.99996H12.1746L12.7167 5.09652C12.7285 5.0768 12.7544 5.07098 12.7736 5.08373C13.5876 5.62642 14.6947 5.28255 15.0581 4.37419L15.6964 2.7785ZM4.53458 9.91344C4.50081 10.4084 4.5 11.0475 4.5 12C4.5 13.4183 4.50081 14.4069 4.55361 15.1808C4.60549 15.9411 4.70251 16.384 4.84254 16.722C5.29926 17.8247 6.1753 18.7007 7.27793 19.1574C7.616 19.2974 8.05881 19.3945 8.81917 19.4463C9.59301 19.4991 10.5817 19.5 12 19.5C13.4183 19.5 14.407 19.4991 15.1808 19.4463C15.9412 19.3945 16.384 19.2974 16.7221 19.1574C17.8247 18.7007 18.7007 17.8247 19.1575 16.722C19.2975 16.384 19.3945 15.9411 19.4464 15.1808C19.4992 14.4069 19.5 13.4183 19.5 12C19.5 11.0475 19.4992 10.4084 19.4654 9.91344C19.4326 9.43198 19.3736 9.19755 19.3097 9.04325C19.056 8.43068 18.5693 7.94399 17.9567 7.69026C17.8024 7.62634 17.568 7.56739 17.0865 7.53454C16.5916 7.50077 15.9524 7.49996 15 7.49996H9C8.04759 7.49996 7.40841 7.50077 6.91348 7.53454C6.43203 7.56739 6.1976 7.62634 6.04329 7.69026C5.43072 7.94399 4.94404 8.43068 4.6903 9.04325C4.62639 9.19755 4.56743 9.43198 4.53458 9.91344Z" fill="white"/>
     </svg>`
 
 ///// ENDPOINTS /////
@@ -41,8 +66,8 @@ const widgetHTML = `
     <div class="chat-widget">
         <div class="chat">
         
+            <!--MAIN-->
             <div class="chat__main">
-                <!--Chat header-->
                 <div class="chat__header">
                     <div>
                         <div class="chat__header-title">
@@ -52,7 +77,6 @@ const widgetHTML = `
                     </div>
                 </div>
                 <div class="chat__header-overlay"></div>
-                <!---->
     
                 <!--Chat body-->
                 <div class="chat__body">
@@ -91,16 +115,57 @@ const widgetHTML = `
                         </div>
                     </div>
                 </div>
-            <!---->
             </div>
             
+            <!--CONVERSATION-->
             <div class="chat__conversation is-hidden">
                 <div class="chat__conversation-header">
                     ${leftArrow2('closeConversation()')}
+                    
+                    <div class="chat__conversation-header-info">
+                        <div class="chat__conversation-header-avatar">
+                            AZ
+                            <div class="chat__conversation-avatar-status"></div>
+                        </div>
+                        
+                        <div class="chat__conversation-header-text">
+                            <div class="chat__conversation-header-name">
+                                Asal Shodiyeva
+                            </div>
+                             <div class="chat__conversation-header-status">
+                                Active
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="conversation-chat">
+                    <div class="chat__conversation-input-wrap">
+                        <input class="chat__conversation-input" type="text" placeholder="Type a reply..."/>
+                        
+                        <div class="chat__conversation-input-controls">
+                            ${smileIcon()}
+                            ${scrapIcon()}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--ASK QUESTION-->
+            <div class="chat__ask-question is-hidden">
+                <div class="chat__ask-question-header">
+                    <div class="chat__ask-question-back">${leftArrow2('closeAskQuestion()')}</div>
+                    <h3>Testing</h3>
+                    
+                    <div class="chat__ask-question-header-content">
+                        <div class="chat__ask-question-header-avatar">AZ</div>
+                        <div class="chat__ask-question-header-title">We typically reply in a few minutes</div>
+                        <div class="chat__ask-question-header-subtitle">Please ask your question.</div>
+                    </div>
                 </div>
             </div>
         </div>
-
+     
         <!--Кнопки открытия и закрытия чата-->
         <div class="rounded-button show-chat-button" onclick="showChat()">
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -176,6 +241,49 @@ const questionsListData = [
     },
 ]
 
+const messagesListData = [
+    {
+        id: 1,
+        message: '👋 Hi ! How can I help?',
+        isOwn: false,
+        type: 'message'
+    },
+    {
+        id: 6,
+        message: 'YESTERDAY',
+        type: 'divider'
+    },
+    {
+        id: 2,
+        message: 'I’m sorry bot, but you’re wrong',
+        isOwn: true,
+        type: 'message'
+    },
+    {
+        id: 7,
+        message: 'TODAY',
+        type: 'divider'
+    },
+    {
+        id: 3,
+        message: 'Can I talk to someone please?',
+        isOwn: true,
+        type: 'message'
+    },
+    {
+        id: 4,
+        message: 'Hi there! I’m Hannah.',
+        isOwn: false,
+        type: 'message'
+    },
+    {
+        id: 5,
+        message: 'How can I help you?',
+        isOwn: false,
+        type: 'message'
+    },
+]
+
 ///// MAIN /////
 const body = document.body;
 
@@ -193,6 +301,8 @@ let questionsList;
 
 let mainPage
 let conversationPage;
+
+let conversationChat;
 
 async function showChat() {
     chat.classList.remove('is-hidden');
@@ -223,13 +333,37 @@ function renderConversationsList() {
 }
 
 function renderQuestionsList() {
-    questionsListData.forEach(conversation => {
+    questionsListData.forEach(question => {
         const questionItem = document.createElement('div');
         questionItem.classList.add('chat__questions-list-item');
         questionItem.innerHTML = `
-            <p class="chat__conversations-last-message">${conversation.question}</p>
+            <p class="chat__conversations-last-message">${question.question}</p>
             ${rightArrow}`;
         questionsList.appendChild(questionItem);
+    })
+}
+
+function renderMessagesList() {
+    messagesListData.forEach((message, index) => {
+        const messageItem = document.createElement('div');
+        if (message.type === 'divider') {
+            messageItem.classList.add('conversation-divider')
+        } else if (message.type === 'message') {
+            messageItem.classList.add('conversation-message');
+            if (message.isOwn) messageItem.classList.add('is-own');
+        }
+
+        // if (message.isOwn === messagesListData[index + 1]?.isOwn && message.isOwn !== messagesListData[index - 1]?.isOwn) {
+        //     messageItem.classList.add('is-joint-first');
+        // }
+        // if (message.isOwn === messagesListData[index - 1]?.isOwn && message.isOwn === messagesListData[index + 1]?.isOwn) {
+        //     messageItem.classList.add('is-joint');
+        // }
+        // if (message.isOwn === messagesListData[index - 1]?.isOwn && message.isOwn !== messagesListData[index + 1]?.isOwn) {
+        //     messageItem.classList.add('is-joint-last');
+        // }
+        messageItem.innerHTML = message.message;
+        conversationChat.appendChild(messageItem);
     })
 }
 
@@ -249,14 +383,18 @@ function openConversation() {
     conversationPage.classList.remove('is-hidden');
 }
 
+function closeConversation() {
+    conversationPage.classList.add('is-hidden');
+    mainPage.classList.remove('is-hidden');
+
+}
+
 
 function initWidget() {
     body.innerHTML = widgetHTML;
 
-
     widgetWrap = document.getElementById('chat-widget__wrap');
     chat = widgetWrap?.querySelector('.chat');
-
 
     showChatButton = widgetWrap?.querySelector('.show-chat-button');
     closeChatButton = widgetWrap?.querySelector('.close-chat-button');
@@ -270,13 +408,13 @@ function initWidget() {
     mainPage = widgetWrap?.querySelector('.chat__main');
     conversationPage = widgetWrap?.querySelector('.chat__conversation');
 
-    // showChatButton.addEventListener('click', showChat);
-    // closeChatButton.addEventListener('click', closeChat);
+    conversationChat = widgetWrap?.querySelector('.conversation-chat');
 }
 
 initWidget()
 renderConversationsList();
 renderQuestionsList();
+renderMessagesList();
 
 
 
