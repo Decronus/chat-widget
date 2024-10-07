@@ -53,6 +53,23 @@ const robotIcon = `
         <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6964 2.7785C15.8502 2.39391 15.6631 1.95743 15.2785 1.8036C14.894 1.64976 14.4575 1.83682 14.3036 2.22141L13.6654 3.8171C13.662 3.82543 13.6586 3.82935 13.6558 3.8319C13.6522 3.83513 13.6468 3.83846 13.6399 3.84061C13.633 3.84276 13.6267 3.84304 13.6219 3.84241C13.6182 3.8419 13.6131 3.84063 13.6056 3.83565C12.8739 3.34783 11.8829 3.57067 11.4305 4.32478L10.4254 5.99996H9C7.13623 5.99996 6.20435 5.99996 5.46927 6.30444C4.48915 6.71041 3.71046 7.48911 3.30448 8.46922C3 9.20431 3 10.1362 3 12C3 14.7956 3 16.1934 3.45672 17.2961C4.06569 18.7662 5.23373 19.9343 6.7039 20.5432C7.80653 21 9.20435 21 12 21C14.7956 21 16.1935 21 17.2961 20.5432C18.7663 19.9343 19.9343 18.7662 20.5433 17.2961C21 16.1934 21 14.7956 21 12C21 10.1362 21 9.20431 20.6955 8.46922C20.2895 7.48911 19.5108 6.71041 18.5307 6.30444C17.7956 5.99996 16.8638 5.99996 15 5.99996H12.1746L12.7167 5.09652C12.7285 5.0768 12.7544 5.07098 12.7736 5.08373C13.5876 5.62642 14.6947 5.28255 15.0581 4.37419L15.6964 2.7785ZM4.53458 9.91344C4.50081 10.4084 4.5 11.0475 4.5 12C4.5 13.4183 4.50081 14.4069 4.55361 15.1808C4.60549 15.9411 4.70251 16.384 4.84254 16.722C5.29926 17.8247 6.1753 18.7007 7.27793 19.1574C7.616 19.2974 8.05881 19.3945 8.81917 19.4463C9.59301 19.4991 10.5817 19.5 12 19.5C13.4183 19.5 14.407 19.4991 15.1808 19.4463C15.9412 19.3945 16.384 19.2974 16.7221 19.1574C17.8247 18.7007 18.7007 17.8247 19.1575 16.722C19.2975 16.384 19.3945 15.9411 19.4464 15.1808C19.4992 14.4069 19.5 13.4183 19.5 12C19.5 11.0475 19.4992 10.4084 19.4654 9.91344C19.4326 9.43198 19.3736 9.19755 19.3097 9.04325C19.056 8.43068 18.5693 7.94399 17.9567 7.69026C17.8024 7.62634 17.568 7.56739 17.0865 7.53454C16.5916 7.50077 15.9524 7.49996 15 7.49996H9C8.04759 7.49996 7.40841 7.50077 6.91348 7.53454C6.43203 7.56739 6.1976 7.62634 6.04329 7.69026C5.43072 7.94399 4.94404 8.43068 4.6903 9.04325C4.62639 9.19755 4.56743 9.43198 4.53458 9.91344Z" fill="white"/>
     </svg>`
 
+const messageIcon = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.00002 13.5C9.5523 13.5 10 13.0523 10 12.5C10 11.9477 9.5523 11.5 9.00002 11.5C8.44773 11.5 8.00002 11.9477 8.00002 12.5C8.00002 13.0523 8.44773 13.5 9.00002 13.5Z" fill="#363538"/>
+        <path d="M14 12.5C14 13.0523 13.5523 13.5 13 13.5C12.4477 13.5 12 13.0523 12 12.5C12 11.9477 12.4477 11.5 13 11.5C13.5523 11.5 14 11.9477 14 12.5Z" fill="#363538"/>
+        <path d="M17 13.5C17.5523 13.5 18 13.0523 18 12.5C18 11.9477 17.5523 11.5 17 11.5C16.4477 11.5 16 11.9477 16 12.5C16 13.0523 16.4477 13.5 17 13.5Z" fill="#363538"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.8305 2.75C7.90524 2.75 3.91099 6.73812 3.91099 11.6596V13.5877L2.38441 17.2936C1.9308 18.3948 2.67021 19.6191 3.85399 19.734L7.66107 20.1037L9.43549 20.724C15.4527 22.8275 21.75 18.3671 21.75 11.9965V11.6596C21.75 6.73812 17.7558 2.75 12.8305 2.75ZM5.41099 11.6596C5.41099 7.56826 8.73196 4.25 12.8305 4.25C16.929 4.25 20.25 7.56826 20.25 11.6596V11.9965C20.25 17.3315 14.975 21.0715 9.93048 19.308L7.98569 18.6282L3.99897 18.241C3.81452 18.2231 3.70192 18.0335 3.77135 17.8649L5.41099 13.8845V11.6596Z" fill="#363538"/>
+    </svg>`
+
+const homeIcon = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 18.75C14.4142 18.75 14.75 18.4142 14.75 18C14.75 17.5858 14.4142 17.25 14 17.25H10C9.58579 17.25 9.25 17.5858 9.25 18C9.25 18.4142 9.58579 18.75 10 18.75H14Z" fill="#363538"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.83261 8.5339L9.5012 3.99902C10.9621 2.83032 13.0379 2.83032 14.4988 3.99902L20.1674 8.5339C21.2989 9.43914 21.8524 10.8856 21.6142 12.315L20.5571 18.6576C20.2356 20.5863 18.5668 22 16.6115 22H7.38849C5.43314 22 3.76438 20.5863 3.44292 18.6576L2.38581 12.315C2.14758 10.8856 2.70105 9.43914 3.83261 8.5339ZM4.76965 9.7052L10.4382 5.17033C11.3513 4.43989 12.6487 4.43989 13.5617 5.17033L19.2303 9.7052C19.9375 10.271 20.2835 11.175 20.1346 12.0684L19.0775 18.411C18.8766 19.6165 17.8336 20.5 16.6115 20.5H7.38849C6.1664 20.5 5.12342 19.6165 4.92251 18.411L3.8654 12.0684C3.71651 11.175 4.06243 10.271 4.76965 9.7052Z" fill="#363538"/>
+    </svg>
+
+
+`
+
 ///// ENDPOINTS /////
 const supportAPI = {
     conversationList: '/support/conversation/list',
@@ -67,7 +84,7 @@ const widgetHTML = `
         <div class="chat">
         
             <!--MAIN-->
-            <div class="chat__main">
+            <div class="chat__main is-hidden">
                 <div class="chat__header">
                     <div>
                         <div class="chat__header-title">
@@ -85,23 +102,38 @@ const widgetHTML = `
                     <div class="chat__conversations-block">
                         <div class="chat__conversations-list"></div>
                         
-                        <div class="button ask-question" onclick="openQuestionBlock()">
-                            <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.90534 25C8.80667 25 8.70736 24.9787 8.61541 24.936C8.39245 24.8312 8.25085 24.616 8.24925 24.3796L8.2233 20.303H8.04967C5.54098 20.303 3.5 18.3618 3.5 15.9752V7.32833C3.5 4.94171 5.54098 3 8.04967 3H20.9503C23.459 3 25.5 4.94171 25.5 7.32833V15.9752C25.5 18.3618 23.459 20.303 20.9503 20.303H15.6273L9.30225 24.8726C9.18597 24.9567 9.04597 25 8.90534 25ZM8.04967 4.24816C6.26466 4.24816 4.81217 5.62979 4.81217 7.32833V15.9752C4.81217 17.6732 6.26466 19.0548 8.04967 19.0548H8.87554C9.23626 19.0548 9.52939 19.3321 9.53163 19.6752L9.55341 23.1241L15.0094 19.1822C15.1237 19.0993 15.2631 19.0548 15.4063 19.0548H20.9503C22.7353 19.0548 24.1878 17.6732 24.1878 15.9752V7.32833C24.1878 5.62979 22.7353 4.24816 20.9503 4.24816H8.04967ZM15.1442 14.3907L15.1481 12.9201C15.8397 12.7982 16.4769 12.4819 16.9866 11.9998C17.6539 11.3678 18.0226 10.5267 18.0249 9.63084C18.029 7.78237 16.4516 6.27459 14.508 6.27032C14.5054 6.27032 14.5032 6.27032 14.501 6.27032C12.5609 6.27032 10.9799 7.76957 10.9751 9.6156C10.9742 9.95994 11.2673 10.2403 11.6296 10.2409H11.6312C11.9929 10.2409 12.2864 9.96238 12.2873 9.61804C12.2902 8.45947 13.2827 7.51848 14.5006 7.51848C14.5006 7.51848 14.5035 7.51848 14.5051 7.51848C15.725 7.52152 16.7152 8.468 16.7127 9.6284C16.7114 10.1903 16.4798 10.7187 16.0608 11.1149C15.643 11.5104 15.0891 11.728 14.5003 11.728C14.4984 11.728 14.4962 11.7274 14.4933 11.728C14.32 11.728 14.1534 11.7932 14.0304 11.9096C13.907 12.0266 13.8375 12.1851 13.8372 12.3508L13.8321 14.3882C13.8311 14.7326 14.1242 15.0129 14.4865 15.0135H14.4881C14.8498 15.0135 15.1433 14.735 15.1442 14.3907ZM14.4852 15.5231C14.0263 15.522 13.6535 15.875 13.6524 16.3115C13.6513 16.748 14.0224 17.1026 14.4812 17.1037C14.9401 17.1047 15.3129 16.7517 15.314 16.3153C15.3151 15.8788 14.944 15.5241 14.4852 15.5231Z"
-                                      fill="white"/>
-                            </svg>
-                            Ask a question
-                        </div>
+                      
+                        
+                        <div class="bottom-panel__wrap">
+                            <div class="button ask-question" style="width: calc(100% - 30px); margin-bottom: 15px;" onclick="openAskQuestionPage()">
+                                <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.90534 25C8.80667 25 8.70736 24.9787 8.61541 24.936C8.39245 24.8312 8.25085 24.616 8.24925 24.3796L8.2233 20.303H8.04967C5.54098 20.303 3.5 18.3618 3.5 15.9752V7.32833C3.5 4.94171 5.54098 3 8.04967 3H20.9503C23.459 3 25.5 4.94171 25.5 7.32833V15.9752C25.5 18.3618 23.459 20.303 20.9503 20.303H15.6273L9.30225 24.8726C9.18597 24.9567 9.04597 25 8.90534 25ZM8.04967 4.24816C6.26466 4.24816 4.81217 5.62979 4.81217 7.32833V15.9752C4.81217 17.6732 6.26466 19.0548 8.04967 19.0548H8.87554C9.23626 19.0548 9.52939 19.3321 9.53163 19.6752L9.55341 23.1241L15.0094 19.1822C15.1237 19.0993 15.2631 19.0548 15.4063 19.0548H20.9503C22.7353 19.0548 24.1878 17.6732 24.1878 15.9752V7.32833C24.1878 5.62979 22.7353 4.24816 20.9503 4.24816H8.04967ZM15.1442 14.3907L15.1481 12.9201C15.8397 12.7982 16.4769 12.4819 16.9866 11.9998C17.6539 11.3678 18.0226 10.5267 18.0249 9.63084C18.029 7.78237 16.4516 6.27459 14.508 6.27032C14.5054 6.27032 14.5032 6.27032 14.501 6.27032C12.5609 6.27032 10.9799 7.76957 10.9751 9.6156C10.9742 9.95994 11.2673 10.2403 11.6296 10.2409H11.6312C11.9929 10.2409 12.2864 9.96238 12.2873 9.61804C12.2902 8.45947 13.2827 7.51848 14.5006 7.51848C14.5006 7.51848 14.5035 7.51848 14.5051 7.51848C15.725 7.52152 16.7152 8.468 16.7127 9.6284C16.7114 10.1903 16.4798 10.7187 16.0608 11.1149C15.643 11.5104 15.0891 11.728 14.5003 11.728C14.4984 11.728 14.4962 11.7274 14.4933 11.728C14.32 11.728 14.1534 11.7932 14.0304 11.9096C13.907 12.0266 13.8375 12.1851 13.8372 12.3508L13.8321 14.3882C13.8311 14.7326 14.1242 15.0129 14.4865 15.0135H14.4881C14.8498 15.0135 15.1433 14.735 15.1442 14.3907ZM14.4852 15.5231C14.0263 15.522 13.6535 15.875 13.6524 16.3115C13.6513 16.748 14.0224 17.1026 14.4812 17.1037C14.9401 17.1047 15.3129 16.7517 15.314 16.3153C15.3151 15.8788 14.944 15.5241 14.4852 15.5231Z"
+                                          fill="white"/>
+                                </svg>
+                                Ask a question
+                            </div>
+                        
+                            <div class="bottom-panel">
+                                <div class="bottom-panel__cell active">
+                                    ${homeIcon}
+                                    <p class="bottom-panel__cell-text">Home</p>
+                                </div>
+                                <div class="bottom-panel__cell" onclick="openMessagesPage()">
+                                    ${messageIcon}
+                                    <p class="bottom-panel__cell-text">Messages</p>
+                                </div>
+                            </div>
+                         </div>
                     </div>
                     
-                    <div class="chat__questions-block is-hidden">
+                  <!--  <div class="chat__questions-block is-hidden">
                         <div class="chat__questions-header">
                             <div class="chat__questions-header-title">
                                 <img src="./images/questions-header-photos.png" width="46"/>
                                 <h3>Ask a question</h3>
                             </div>
                             
-                            ${leftArrow('closeQuestionBlock()')}
+                            ${leftArrow('closeQuestionPage()')}
                         </div>
                         <div class="chat__questions-content">
                             <div class="chat__questions-input-wrap">
@@ -113,14 +145,14 @@ const widgetHTML = `
                             
                              <div class="chat__questions-list"></div>
                         </div>
-                    </div>
+                    </div> --!>
                 </div>
             </div>
             
             <!--CONVERSATION-->
             <div class="chat__conversation is-hidden">
                 <div class="chat__conversation-header">
-                    ${leftArrow2('closeConversation()')}
+                    ${leftArrow2('openMessagesPageFromConversation()')}
                     
                     <div class="chat__conversation-header-info">
                         <div class="chat__conversation-header-avatar">
@@ -154,13 +186,35 @@ const widgetHTML = `
             <!--ASK QUESTION-->
             <div class="chat__ask-question is-hidden">
                 <div class="chat__ask-question-header">
-                    <div class="chat__ask-question-back">${leftArrow2('closeAskQuestion()')}</div>
+                    <div class="chat__ask-question-back">${leftArrow2('openMessagesPageFromAskQuestion()')}</div>
                     <h3>Testing</h3>
                     
                     <div class="chat__ask-question-header-content">
                         <div class="chat__ask-question-header-avatar">AZ</div>
                         <div class="chat__ask-question-header-title">We typically reply in a few minutes</div>
                         <div class="chat__ask-question-header-subtitle">Please ask your question.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--MESSAGES-->
+            <div class="chat__messages">
+                <div class="chat__messages-header">
+                    <h3>Messages</h3>
+                </div>
+                
+                <div class="chat__messages-conversations-list"></div>
+                
+                <div class="bottom-panel__wrap">
+                    <div class="bottom-panel">
+                        <div class="bottom-panel__cell" onclick="openMainPage()">
+                            ${homeIcon}
+                            <p class="bottom-panel__cell-text">Home</p>
+                        </div>
+                        <div class="bottom-panel__cell active">
+                            ${messageIcon}
+                            <p class="bottom-panel__cell-text">Messages</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -296,11 +350,13 @@ let askQuestionButton;
 
 let conversationsList;
 let conversationsBlock;
-let questionsBlock;
+
 let questionsList;
 
-let mainPage
+let mainPage;
 let conversationPage;
+let askQuestionPage;
+let messagesPage;
 
 let conversationChat;
 
@@ -319,12 +375,12 @@ function closeChat() {
 function renderConversationsList() {
     conversationsListData.forEach(conversation => {
         const conversationItem = document.createElement('div');
-        conversationItem.classList.add('chat__conversations-list-item');
-        conversationItem.addEventListener('click', openConversation);
+        conversationItem.classList.add('conversation-list-item');
+        conversationItem.addEventListener('click', openConversationPage);
         conversationItem.innerHTML = `
-            <div class="chat__conversations-data">
-                <p class="chat__conversations-last-message">${conversation.lastMessage}</p>
-                <p class="chat__conversations-info">${conversation.author} • ${conversation.lastMessageTime}</p>
+            <div class="conversation-data">
+                <p class="conversation-last-message">${conversation.lastMessage}</p>
+                <p class="conversation-info">${conversation.author} • ${conversation.lastMessageTime}</p>
             </div>
             ${conversation.isUnread ? unreadIcon : rightArrow}
         `;
@@ -367,23 +423,43 @@ function renderMessagesList() {
     })
 }
 
-function openQuestionBlock() {
-    conversationsBlock.classList.add('is-hidden');
-    questionsBlock.classList.remove('is-hidden');
+function openMainPage() {
+    messagesPage.classList.add('is-hidden');
+    mainPage.classList.remove('is-hidden');
 
 }
 
-function closeQuestionBlock() {
-    questionsBlock.classList.add('is-hidden');
-    conversationsBlock.classList.remove('is-hidden');
-}
-
-function openConversation() {
+function openMessagesPage() {
     mainPage.classList.add('is-hidden');
+    messagesPage.classList.remove('is-hidden');
+}
+
+function openMessagesPageFromConversation() {
+    conversationPage.classList.add('is-hidden');
+    messagesPage.classList.remove('is-hidden');
+}
+
+function openMessagesPageFromAskQuestion() {
+    askQuestionPage.classList.add('is-hidden');
+    messagesPage.classList.remove('is-hidden');
+}
+
+function openAskQuestionPage() {
+    askQuestionPage.classList.remove('is-hidden');
+    mainPage.classList.add('is-hidden');
+}
+
+function closeAskQuestionPage() {
+    askQuestionPage.classList.add('is-hidden');
+    mainPage.classList.remove('is-hidden');
+}
+
+function openConversationPage() {
+    messagesPage.classList.add('is-hidden');
     conversationPage.classList.remove('is-hidden');
 }
 
-function closeConversation() {
+function closeConversationPage() {
     conversationPage.classList.add('is-hidden');
     mainPage.classList.remove('is-hidden');
 
@@ -401,19 +477,21 @@ function initWidget() {
     askQuestionButton = widgetWrap?.querySelector('.ask-question');
 
     conversationsBlock = widgetWrap?.querySelector('.chat__conversations-block');
-    conversationsList = widgetWrap?.querySelector('.chat__conversations-list');
-    questionsBlock = widgetWrap?.querySelector('.chat__questions-block');
+    conversationsList = widgetWrap?.querySelector('.chat__messages-conversations-list');
+
     questionsList = widgetWrap?.querySelector('.chat__questions-list');
 
     mainPage = widgetWrap?.querySelector('.chat__main');
     conversationPage = widgetWrap?.querySelector('.chat__conversation');
+    askQuestionPage = widgetWrap?.querySelector('.chat__ask-question');
+    messagesPage = widgetWrap?.querySelector('.chat__messages');
 
     conversationChat = widgetWrap?.querySelector('.conversation-chat');
 }
 
 initWidget()
 renderConversationsList();
-renderQuestionsList();
+// renderQuestionsList();
 renderMessagesList();
 
 
