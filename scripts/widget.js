@@ -243,6 +243,60 @@ const widgetHTML = `
 </div>
 `
 
+///// ENDPOINTS /////
+const baseURL = (panelDomain) => `https://usersapi.makeyourpanel.com/usersapi/${panelDomain}/v1/`;
+let panelDomain = 'panel.makeyourpanel.com';
+
+const support = {
+    conversationList: ({token, page}) => {
+        const query = new URLSearchParams({token, page}).toString();
+        return baseURL('panel.makeyourpanel.com') + `support/conversation/list/?${query}`
+    },
+    messageList: ({token, conversation_uuid, page, row_per_page}) => {
+        const query = new URLSearchParams({token, conversation_uuid, page, row_per_page}).toString();
+        return baseURL('panel.makeyourpanel.com') + `support/message/list/?${query}`
+    },
+    messageSetEmail: () => {
+        return baseURL('panel.makeyourpanel.com') + `support/message/set_email/`
+    },
+}
+
+///// FETCHES /////
+async function getSupportConversationList() {
+    try {
+        const data = await fetch(support.conversationList({token: 'qwerty'}),)
+    } catch (e) {
+        console.log('e', e)
+    }
+}
+
+
+async function getSupportMessageList() {
+    try {
+        const data = await fetch(support.messageList({
+            token: 'qwerty',
+            conversation_uuid: 'asdf',
+            page: 1,
+            row_per_page: 10
+        }))
+        console.log('data', data)
+    } catch (e) {
+        console.log('e', e)
+    }
+}
+
+async function setEmail({user_agent, ip, token, email}) {
+    try {
+        const body = {user_agent, ip, token, email}
+        const data = await fetch(support.messageSetEmail(), {body: JSON.stringify(body), method: 'POST'})
+        console.log('data', data)
+    } catch (e) {
+        console.log('e', e)
+    }
+}
+
+// void setEmail({user_agent: 'asdf', ip: 'asdf', token: 'asdf', email: 'zick3333@mail.ru'});
+
 ///// MOCK DATA /////
 const conversationsListData = [
     {
