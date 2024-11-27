@@ -2,6 +2,7 @@ let panelDomain = 'panel.makeyourpanel.com';
 export const baseURL = `https://usersapi.makeyourpanel.com/usersapi/${panelDomain}/v1/`;
 
 export const support = {
+    getLead: '/support/lead/get',
     conversationList: ({ token, page }) => {
         const query = new URLSearchParams({ token, page }).toString();
         return `/support/conversation/list/?${query}`;
@@ -16,5 +17,6 @@ export const support = {
         return `/support/message/list/?${query}`;
     },
     messageNew: `/support/message/new`,
+    conversationNew: `/support/conversation/new`,
     messageSetEmail: `/support/message/set_email/`,
 };
