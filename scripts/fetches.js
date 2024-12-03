@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { baseURL, support } from './endpoints.js';
-import { currentConversationUUID, messages, conversations } from './widget';
+import { currentConversationUUID, messages, conversations, conversationsPages } from './widget';
 
 const instance = axios.create({
     baseURL,
@@ -16,17 +16,18 @@ export async function getLead({ user_agent, ip, token, get_params }) {
     }
 }
 
-export async function getSupportConversationList() {
+export async function getSupportConversationsList(page) {
     try {
-        const { data } = await instance.get(support.conversationList({ token: appConfig.token, page: 1 }));
-        conversations = data.payloads.data;
+        const { data } = await instance.get(support.conversationList({ token: appConfig.token, page: page || 1 }));
+        conversations.push(...data.payloads.data);
+        conversationsPages = data.payloads.pages;
         return conversations;
     } catch (e) {
         console.error('e', e);
     }
 }
 
-export async function getSupportMessageList(uuid) {
+export async function getSupportMessagesList(uuid) {
     try {
         currentConversationUUID = uuid;
         const { data } = await instance.get(
@@ -34,10 +35,10 @@ export async function getSupportMessageList(uuid) {
                 token: appConfig.token,
                 conversation_uuid: uuid,
                 page: 1,
-                row_per_page: 10,
+                row_per_page: 20,
             })
         );
-        messages = data.payloads.data;
+        messages.push(...data.payloads.data);
         return messages;
     } catch (e) {
         console.log('e', e);
@@ -57,8 +58,25 @@ export async function setEmail({ user_agent, ip, token, email }) {
 export async function createConversation({ subject, message, user_agent, ip, files, token }) {
     try {
         const body = { subject, message, user_agent, ip, files, token };
-        const { payloads } = await instance.post(support.conversationNew, body);
-        return payloads;
+        const { data } = await instance.post(support.conversationNew, body);
+        return data.payloads;
+    } catch (e) {
+        console.log('e', e);
+    }
+}
+
+export async function sendMessage({ message, files, user_agent, ip }) {
+    try {
+        const body = {
+            message,
+            files,
+            user_agent,
+            ip,
+            token: appConfig.token,
+            conversation_uuid: currentConversationUUID,
+        };
+        const { data } = await instance.post(support.messageNew, body);
+        return data.payloads;
     } catch (e) {
         console.log('e', e);
     }

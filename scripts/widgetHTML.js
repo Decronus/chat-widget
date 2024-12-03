@@ -74,25 +74,19 @@ export const widgetHTML = `
                     </div>
                 </div>
                 
-                <div id="ask-question__messages-list" class="messages-list">
-                    <div class="message-wrap">
-                            ${robotAvatar}
-                            <div class="message admin-message">
-                                What is your question?
-                            </div>
-                    </div>
-                    
-                    
-                </div>
-                
-                            
+                <div id="ask-question__messages-list" class="messages-list"></div>
+                       
                 <div class="conversation-chat">
                     <div class="chat__conversation-input-wrap">
                         <input id="ask-question__input" class="chat__conversation-input" type="text" placeholder="Type a reply..."/>
                         
                         <div class="chat__conversation-input-controls">
-                            ${smileIcon}
-                            ${scrapIcon}
+                            <div class="toggle-emoji-picker-button">
+                                ${smileIcon}                        
+                            </div>
+                            <div>
+                                ${scrapIcon}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,8 +121,12 @@ export const widgetHTML = `
                         <input id="message-input" class="chat__conversation-input" type="text" placeholder="Type a reply..."/>
                         
                         <div class="chat__conversation-input-controls">
-                            ${smileIcon}
-                            ${scrapIcon}
+                            <div class="toggle-emoji-picker-button">
+                                ${smileIcon}                        
+                            </div>
+                            <div>
+                                ${scrapIcon}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -140,14 +138,10 @@ export const widgetHTML = `
                     <h3>Conversations</h3>
                 </div>
                 
-                <div class="conversations-list"></div>
-                
-                 <!--<div class="chat__messages-button">
-                    Send us a message
-                    ${sendIcon}
+                <div class="conversations-list">
+                    <div class="loader"></div>
                 </div>
-                -->
-                
+                             
                 <div class="bottom-panel__wrap">
                     <div class="bottom-panel bottom-panel__home-button">
                         <div class="bottom-panel__cell">

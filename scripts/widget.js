@@ -1,10 +1,14 @@
 import { rightArrow, unreadIcon } from './components/icons';
 import { widgetHTML } from './widgetHTML';
-import { getLead, getSupportConversationList, getSupportMessageList, setEmail, createConversation } from './fetches';
+
+import { getLead, getSupportConversationsList, getSupportMessagesList, setEmail, createConversation, sendMessage } from './fetches';
 import { getTime } from './utils';
-import { robotAvatar } from './components/robotAvatar';
+
+const { robotAvatar } = () => import('./components/robotAvatar');
 import { enterEmailBlock } from './components/enterEmailBlock';
 import connectWebSocket from './websocket';
+import { askQuestionFirstMessage } from './components/askQuestionFirstMessage';
+import { createEmojiPicker } from './emojiPicker';
 
 connectWebSocket();
 
@@ -17,8 +21,10 @@ const token = appConfig.token;
 
 ///// DATA /////
 export let currentConversationUUID = null;
-export let messages = null;
-export let conversations = null;
+export let messages = [];
+export let conversations = [];
+export let conversationsPages = {};
+export let currentConversationsPage = 1;
 
 ///// MAIN /////
 const body = document.body;
@@ -71,7 +77,8 @@ function renderConversationsList() {
         conversationItem.addEventListener('click', async () => {
             currentConversationUUID = conversation.uuid;
             openConversationPage();
-            await getSupportMessageList(conversation.uuid);
+            messagesList.insertAdjacentHTML('beforeend', "<div class='loader'/>");
+            await getSupportMessagesList(conversation.uuid);
             renderMessagesList(conversation.uuid);
         });
 
@@ -87,8 +94,9 @@ function renderConversationsList() {
     });
 }
 
-function renderMessagesList(uuid) {
-    messages.forEach((message, index) => {
+function renderMessagesList() {
+    messagesList.innerHTML = '';
+    messages.forEach(message => {
         const messageItem = document.createElement('div');
         if (message.type === 'divider') {
             messageItem.classList.add('divider');
@@ -109,33 +117,57 @@ function openMainPage() {
     mainPage.classList.remove('is-hidden');
 }
 
+function clearConversationsData() {
+    currentConversationsPage = 1;
+    conversations = [];
+    conversationsPages = {};
+    conversationsList.innerHTML = '';
+    conversationsList.insertAdjacentHTML('beforeend', "<div class='loader' style='margin-top: 24px'/>");
+}
+
 async function openConversationsPage() {
     mainPage.classList.add('is-hidden');
     conversationsPage.classList.remove('is-hidden');
-    await getSupportConversationList();
+    clearConversationsData();
+    await getSupportConversationsList();
     renderConversationsList();
+    conversationsList.addEventListener('scroll', updateConversationsListOnScroll);
+}
+
+async function updateConversationsListOnScroll() {
+    if (conversationsList.scrollTop + conversationsList.clientHeight >= conversationsList.scrollHeight) {
+        if (currentConversationsPage >= conversationsPages.page_quantity) {
+            conversationsList.removeEventListener('scroll', updateConversationsListOnScroll);
+            return;
+        }
+        conversationsList.insertAdjacentHTML('beforeend', '<div class="loader" style="margin-top: 24px;"/>');
+        await getSupportConversationsList(++currentConversationsPage);
+        renderConversationsList();
+    }
 }
 
 async function closeConversationAndOpenConversationList() {
     currentConversationUUID = null;
-    messages = null;
-    messagesList.innerHTML = '';
     conversationPage.classList.add('is-hidden');
     conversationsPage.classList.remove('is-hidden');
-    await getSupportConversationList();
+    clearConversationsData();
+    await getSupportConversationsList();
     renderConversationsList();
 }
 
 async function closeAskQuestionAndOpenConversationsPage() {
     askQuestionPage.classList.add('is-hidden');
     conversationsPage.classList.remove('is-hidden');
-    await getSupportConversationList();
+    askQuestionMessagesList.innerHTML = '';
+    clearConversationsData();
+    await getSupportConversationsList();
     renderConversationsList();
 }
 
 function openAskQuestionPage() {
     askQuestionPage.classList.remove('is-hidden');
     mainPage.classList.add('is-hidden');
+    askQuestionMessagesList.insertAdjacentHTML('beforeend', askQuestionFirstMessage);
 }
 
 function closeAskQuestionPage() {
@@ -146,6 +178,8 @@ function closeAskQuestionPage() {
 function openConversationPage() {
     conversationsPage.classList.add('is-hidden');
     conversationPage.classList.remove('is-hidden');
+    messagesList.innerHTML = '';
+    messages = [];
 }
 
 function closeConversationPage() {
@@ -158,7 +192,15 @@ async function handleCreateConversation(e) {
         if (e.key === 'Enter') {
             const value = askQuestionInput.value;
             if (!value) return;
-            await createConversation({ subject: value, message: value, files: [], user_agent: userAgent, ip, token });
+            await createConversation({
+                subject: value,
+                message: value,
+                files: [],
+                user_agent: userAgent,
+                ip,
+                token,
+            });
+
             askQuestionInput.value = '';
             const messagesList = document.querySelector('.messages-list');
             const messageItem = document.createElement('div');
@@ -199,7 +241,7 @@ async function handleSendMessage(e) {
         if (e.key === 'Enter') {
             const value = messageInput.value;
             if (!value) return;
-            await createConversation({ subject: value, message: value, files: [], user_agent: userAgent, ip, token });
+            await sendMessage({ message: value, files: [], user_agent: userAgent, ip, token });
             messageInput.value = '';
         }
     } catch (e) {
@@ -251,15 +293,10 @@ function initWidget() {
     askQuestionInput?.addEventListener('keydown', handleCreateConversation);
 
     messageInput = widgetWrap?.querySelector('#message-input');
-    messageInput?.addEventListener('keydown', handleCreateConversation);
+    messageInput?.addEventListener('keydown', handleSendMessage);
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
     initWidget();
-
-    // const { data } = await getSupportConversationList();
-    // conversations = data;
-    // renderConversationsList();
-
-    // void renderMessagesList();
+    createEmojiPicker();
 });

@@ -422,6 +422,7 @@
   padding: 0 20px;
   overflow: scroll;
   height: 485px;
+  width: 100%;
 }
 #chat-widget__wrap .conversations-list .conversation-list-item {
   display: flex;
@@ -494,6 +495,7 @@
   bottom: 0;
   left: 0;
   border-top: 1px solid #ebebeb;
+  background: #ffffff;
 }
 #chat-widget__wrap .conversation-chat .chat__conversation-input-wrap .chat__conversation-input {
   width: 100%;
@@ -512,9 +514,13 @@
   align-items: center;
   gap: 12px;
   margin-right: 20px;
+  position: relative;
 }
 #chat-widget__wrap .conversation-chat .chat__conversation-input-wrap .chat__conversation-input-controls svg {
   cursor: pointer;
+}
+#chat-widget__wrap #ask-question__messages-list {
+  height: 354px;
 }
 #chat-widget__wrap .messages-list {
   padding: 20px;
@@ -562,6 +568,70 @@
   background: #5c59e8;
   border: 1px solid #9b99ff;
   border-radius: 50%;
+}
+#chat-widget__wrap .input-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 308px;
+}
+#chat-widget__wrap .input-block span {
+  font-size: 15px;
+  font-weight: 500;
+}
+#chat-widget__wrap .input-block .input-block__error {
+  color: #c30b0b;
+  font-size: 14px;
+  font-weight: 400;
+}
+#chat-widget__wrap .input-block .input-block__error.is-hidden {
+  display: none;
+}
+#chat-widget__wrap .input-block .input-block__input-wrap {
+  display: flex;
+  gap: 10px;
+}
+#chat-widget__wrap .input-block .input-block__input-wrap input {
+  width: 100%;
+  height: 42px;
+  outline: none;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10.5px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e0;
+}
+#chat-widget__wrap .input-block .input-block__input-wrap input::placeholder {
+  color: #b2bbc6;
+}
+#chat-widget__wrap .input-block .input-block__input-wrap .input-block__send-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: #5c59e8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+#chat-widget__wrap .input-block .input-block__input-wrap .input-block__send-button:hover {
+  transform: scale(1.03);
+}
+#chat-widget__wrap .loader {
+  margin: 0 auto;
+  width: 32px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #5c59e8 96%, rgba(0, 0, 0, 0)) top/4px 4px no-repeat, conic-gradient(rgba(0, 0, 0, 0) 30%, #5c59e8);
+  -webkit-mask: radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(100% - 4px), #000 0);
+  mask: radial-gradient(farthest-side, rgba(0, 0, 0, 0) calc(100% - 4px), #000 0);
+  animation: l13 1s infinite linear;
+}
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn);
+  }
 }
 
 /*# sourceMappingURL=widget.css.map */
