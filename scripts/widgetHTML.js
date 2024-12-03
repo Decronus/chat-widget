@@ -53,7 +53,7 @@ export const widgetHTML = `
                                 </div>
                                 <div class="bottom-panel__cell bottom-panel__messages-button">
                                     ${messageIcon}
-                                    <p class="bottom-panel__cell-text">Messages</p>
+                                    <p class="bottom-panel__cell-text">Conversations</p>
                                 </div>
                             </div>
                          </div>
@@ -78,9 +78,11 @@ export const widgetHTML = `
                     <div class="message-wrap">
                             ${robotAvatar}
                             <div class="message admin-message">
-                                Give the team a way to reach you
+                                What is your question?
                             </div>
                     </div>
+                    
+                    
                 </div>
                 
                             
@@ -135,7 +137,7 @@ export const widgetHTML = `
             <!--CONVERSATIONS-->
             <div class="chat__messages is-hidden">
                 <div class="chat__messages-header">
-                    <h3>Messages</h3>
+                    <h3>Conversations</h3>
                 </div>
                 
                 <div class="conversations-list"></div>
@@ -154,7 +156,7 @@ export const widgetHTML = `
                         </div>
                         <div class="bottom-panel__cell bottom-panel__messages-button active">
                             ${messageIcon}
-                            <p class="bottom-panel__cell-text">Messages</p>
+                            <p class="bottom-panel__cell-text">Conversations</p>
                         </div>
                     </div>
                 </div>

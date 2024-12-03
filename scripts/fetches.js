@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { baseURL, support } from './endpoints.js';
+import { currentConversationUUID, messages, conversations } from './widget';
 
 const instance = axios.create({
     baseURL,
@@ -18,7 +19,8 @@ export async function getLead({ user_agent, ip, token, get_params }) {
 export async function getSupportConversationList() {
     try {
         const { data } = await instance.get(support.conversationList({ token: appConfig.token, page: 1 }));
-        return data.payloads;
+        conversations = data.payloads.data;
+        return conversations;
     } catch (e) {
         console.error('e', e);
     }
@@ -26,6 +28,7 @@ export async function getSupportConversationList() {
 
 export async function getSupportMessageList(uuid) {
     try {
+        currentConversationUUID = uuid;
         const { data } = await instance.get(
             support.messageList({
                 token: appConfig.token,
@@ -34,7 +37,8 @@ export async function getSupportMessageList(uuid) {
                 row_per_page: 10,
             })
         );
-        return data.payloads;
+        messages = data.payloads.data;
+        return messages;
     } catch (e) {
         console.log('e', e);
     }
@@ -46,7 +50,7 @@ export async function setEmail({ user_agent, ip, token, email }) {
         const { payloads } = await instance.post(support.messageSetEmail, body);
         return payloads;
     } catch (e) {
-        console.log('e', e);
+        throw e;
     }
 }
 

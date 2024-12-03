@@ -3,6 +3,10 @@ import { widgetHTML } from './widgetHTML';
 import { getLead, getSupportConversationList, getSupportMessageList, setEmail, createConversation } from './fetches';
 import { getTime } from './utils';
 import { robotAvatar } from './components/robotAvatar';
+import { enterEmailBlock } from './components/enterEmailBlock';
+import connectWebSocket from './websocket';
+
+connectWebSocket();
 
 const userAgent = navigator.userAgent;
 const ip = '127.0.0.1';
@@ -12,7 +16,9 @@ const token = appConfig.token;
 // void setEmail({ user_agent: userAgent, ip, token, email: 'zick3333@mail.ru' });
 
 ///// DATA /////
-let currentConversationUUID = null;
+export let currentConversationUUID = null;
+export let messages = null;
+export let conversations = null;
 
 ///// MAIN /////
 const body = document.body;
@@ -38,7 +44,7 @@ let questionsList;
 let mainPage;
 let conversationPage;
 let askQuestionPage;
-let messagesPage;
+let conversationsPage;
 
 let askQuestionMessagesList;
 let messagesList;
@@ -57,15 +63,18 @@ function closeChat() {
     if (closeChatButton) closeChatButton.style.display = 'none';
 }
 
-async function renderConversationsList() {
-    const { data } = await getSupportConversationList();
+function renderConversationsList() {
     conversationsList.innerHTML = '';
-    data.forEach(conversation => {
+    conversations.forEach(conversation => {
         const conversationItem = document.createElement('div');
-        conversationItem.addEventListener('click', () => {
+
+        conversationItem.addEventListener('click', async () => {
+            currentConversationUUID = conversation.uuid;
             openConversationPage();
+            await getSupportMessageList(conversation.uuid);
             renderMessagesList(conversation.uuid);
         });
+
         conversationItem.classList.add('conversation-list-item');
         conversationItem.innerHTML = `
             <div class="conversation-data">
@@ -78,20 +87,8 @@ async function renderConversationsList() {
     });
 }
 
-// function renderQuestionsList() {
-//     questionsListData.forEach(question => {
-//         const questionItem = document.createElement('div');
-//         questionItem.classList.add('chat__questions-list-item');
-//         questionItem.innerHTML = `
-//             <p class="chat__conversations-last-message">${question.question}</p>
-//             ${rightArrow}`;
-//         questionsList.appendChild(questionItem);
-//     });
-// }
-
-async function renderMessagesList(uuid) {
-    const { data } = await getSupportMessageList(uuid);
-    data.forEach((message, index) => {
+function renderMessagesList(uuid) {
+    messages.forEach((message, index) => {
         const messageItem = document.createElement('div');
         if (message.type === 'divider') {
             messageItem.classList.add('divider');
@@ -108,26 +105,32 @@ async function renderMessagesList(uuid) {
 }
 
 function openMainPage() {
-    messagesPage.classList.add('is-hidden');
+    conversationsPage.classList.add('is-hidden');
     mainPage.classList.remove('is-hidden');
 }
 
-function openMessagesPage() {
+async function openConversationsPage() {
     mainPage.classList.add('is-hidden');
-    messagesPage.classList.remove('is-hidden');
+    conversationsPage.classList.remove('is-hidden');
+    await getSupportConversationList();
+    renderConversationsList();
 }
 
-function closeConversationAndOpenConversationList() {
+async function closeConversationAndOpenConversationList() {
+    currentConversationUUID = null;
+    messages = null;
     messagesList.innerHTML = '';
     conversationPage.classList.add('is-hidden');
-    messagesPage.classList.remove('is-hidden');
-    void renderConversationsList();
+    conversationsPage.classList.remove('is-hidden');
+    await getSupportConversationList();
+    renderConversationsList();
 }
 
-function closeAskQuestionAndOpenMessagePage() {
+async function closeAskQuestionAndOpenConversationsPage() {
     askQuestionPage.classList.add('is-hidden');
-    messagesPage.classList.remove('is-hidden');
-    void renderConversationsList();
+    conversationsPage.classList.remove('is-hidden');
+    await getSupportConversationList();
+    renderConversationsList();
 }
 
 function openAskQuestionPage() {
@@ -141,7 +144,7 @@ function closeAskQuestionPage() {
 }
 
 function openConversationPage() {
-    messagesPage.classList.add('is-hidden');
+    conversationsPage.classList.add('is-hidden');
     conversationPage.classList.remove('is-hidden');
 }
 
@@ -162,6 +165,29 @@ async function handleCreateConversation(e) {
             messageItem.classList.add('message', 'user-message');
             messageItem.innerHTML = value;
             messagesList.appendChild(messageItem);
+
+            if (!window.appConfig.email) {
+                setTimeout(() => {
+                    messagesList.insertAdjacentHTML('beforeend', enterEmailBlock);
+                    const enterEmailInput = document.getElementById('enter-email-input');
+                    const sendButton = document.querySelector('.input-block__send-button');
+                    sendButton.addEventListener('click', async () => {
+                        const email = enterEmailInput.value;
+                        if (!email) return;
+                        const error = document.querySelector('.input-block__error');
+                        try {
+                            await setEmail({ user_agent: userAgent, ip, token, email });
+                            window.appConfig.email = email;
+                            enterEmailInput.setAttribute('disabled', 'true');
+                            sendButton.style.display = 'none';
+                            error.classList.add('is-hidden');
+                        } catch (e) {
+                            error.textContent = e.response.data.message;
+                            error.classList.remove('is-hidden');
+                        }
+                    });
+                }, 1000);
+            }
         }
     } catch (e) {
         console.error(e);
@@ -197,7 +223,7 @@ function initWidget() {
     bottomPanelHomeButtons?.forEach(el => el?.addEventListener('click', openMainPage));
 
     bottomPanelMessageButtons = widgetWrap?.querySelectorAll('.bottom-panel__messages-button');
-    bottomPanelMessageButtons?.forEach(el => el?.addEventListener('click', openMessagesPage));
+    bottomPanelMessageButtons?.forEach(el => el?.addEventListener('click', openConversationsPage));
 
     askQuestionButton = widgetWrap?.querySelector('.ask-question');
     askQuestionButton?.addEventListener('click', openAskQuestionPage);
@@ -206,7 +232,7 @@ function initWidget() {
     closeConversationAndOpenConversationListButton?.addEventListener('click', closeConversationAndOpenConversationList);
 
     closeAskQuestionAndOpenMessagesButton = widgetWrap?.querySelector('.chat__ask-question-back');
-    closeAskQuestionAndOpenMessagesButton?.addEventListener('click', closeAskQuestionAndOpenMessagePage);
+    closeAskQuestionAndOpenMessagesButton?.addEventListener('click', closeAskQuestionAndOpenConversationsPage);
 
     conversationsBlock = widgetWrap?.querySelector('.chat__conversations-block');
     conversationsList = widgetWrap?.querySelector('.conversations-list');
@@ -216,7 +242,7 @@ function initWidget() {
     mainPage = widgetWrap?.querySelector('.chat__main');
     conversationPage = widgetWrap?.querySelector('.chat__conversation');
     askQuestionPage = widgetWrap?.querySelector('.chat__ask-question');
-    messagesPage = widgetWrap?.querySelector('.chat__messages');
+    conversationsPage = widgetWrap?.querySelector('.chat__messages');
 
     askQuestionMessagesList = widgetWrap?.querySelector('#ask-question__messages-list');
     messagesList = widgetWrap?.querySelector('#common-messages-list');
@@ -228,9 +254,12 @@ function initWidget() {
     messageInput?.addEventListener('keydown', handleCreateConversation);
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     initWidget();
-    void renderConversationsList();
-    // renderQuestionsList();
+
+    // const { data } = await getSupportConversationList();
+    // conversations = data;
+    // renderConversationsList();
+
     // void renderMessagesList();
 });

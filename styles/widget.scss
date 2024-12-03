@@ -639,6 +639,7 @@
             bottom: 0;
             left: 0;
             border-top: 1px solid #ebebeb;
+            background: #ffffff;
 
             .chat__conversation-input {
                 width: 100%;
@@ -668,6 +669,10 @@
     }
 
     ///// MESSAGES LIST /////
+    #ask-question__messages-list {
+        height: 354px;
+    }
+
     .messages-list {
         padding: 20px;
         display: flex;
@@ -721,5 +726,65 @@
         background: $main-color;
         border: 1px solid $main-stroke-color;
         border-radius: 50%;
+    }
+
+    ///// INPUT BLOCK /////
+    .input-block {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 308px;
+
+        span {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .input-block__error {
+            color: #c30b0b;
+            font-size: 14px;
+            font-weight: 400;
+
+            &.is-hidden {
+                display: none;
+            }
+        }
+
+        .input-block__input-wrap {
+            display: flex;
+            gap: 10px;
+
+            input {
+                width: 100%;
+                height: 42px;
+                outline: none;
+                font-size: 14px;
+                font-weight: 400;
+                padding: 10.5px 12px;
+                //background: #f2f2f2;
+                border-radius: 8px;
+                border: 1px solid #cbd5e0;
+
+                &::placeholder {
+                    color: #b2bbc6;
+                }
+            }
+
+            .input-block__send-button {
+                width: 42px;
+                height: 42px;
+                border-radius: 8px;
+                background: $main-color;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-shrink: 0;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.03);
+                }
+            }
+        }
     }
 }
