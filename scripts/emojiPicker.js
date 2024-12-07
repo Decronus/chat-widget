@@ -3,7 +3,6 @@ import { Picker } from 'emoji-mart';
 let emojiPicker;
 
 export function createEmojiPicker() {
-    // const emojiPickerContainer = document.querySelectorAll('.chat__conversation-input-controls');
     const chatConversationInput = document.querySelectorAll('.chat__conversation-input');
     const toggleEmojiPickerButton = document.querySelectorAll('.toggle-emoji-picker-button');
     toggleEmojiPickerButton.forEach(el => el.addEventListener('click', toggleEmojiPicker));
@@ -21,10 +20,22 @@ export function createEmojiPicker() {
     emojiPicker.style.position = 'absolute';
     emojiPicker.style.bottom = '190px';
     emojiPicker.style.right = '64px';
-    emojiPicker.style.visibility = 'visible';
+    emojiPicker.style.visibility = 'hidden';
     document.body.appendChild(emojiPicker);
 }
 
 export function toggleEmojiPicker() {
-    emojiPicker.style.visibility = emojiPicker.style.visibility === 'visible' ? 'hidden' : 'visible';
+    if (emojiPicker.style.visibility === 'visible') {
+        closeEmojiPicker();
+    } else {
+        openEmojiPicker();
+    }
+}
+
+export function openEmojiPicker() {
+    emojiPicker.style.visibility = 'visible';
+}
+
+export function closeEmojiPicker() {
+    emojiPicker.style.visibility = 'hidden';
 }

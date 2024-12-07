@@ -1,17 +1,5 @@
-import {
-    rightArrow,
-    leftArrow,
-    leftArrow2,
-    scrapIcon,
-    smileIcon,
-    unreadIcon,
-    searchIcon,
-    robotIcon,
-    messageIcon,
-    homeIcon,
-    sendIcon,
-} from './components/icons';
-import { robotAvatar } from './components/robotAvatar';
+import { leftArrow2, messageIcon, homeIcon } from './components/icons';
+import { chatConversationInput } from './components/chatConversationInput';
 
 export const widgetHTML = `
     <div id="chat-widget__wrap">
@@ -76,20 +64,7 @@ export const widgetHTML = `
                 
                 <div id="ask-question__messages-list" class="messages-list"></div>
                        
-                <div class="conversation-chat">
-                    <div class="chat__conversation-input-wrap">
-                        <input id="ask-question__input" class="chat__conversation-input" type="text" placeholder="Type a reply..."/>
-                        
-                        <div class="chat__conversation-input-controls">
-                            <div class="toggle-emoji-picker-button">
-                                ${smileIcon}                        
-                            </div>
-                            <div>
-                                ${scrapIcon}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                ${chatConversationInput('ask-question__input')}
             </div>
             
             <!--CONVERSATION-->
@@ -116,20 +91,7 @@ export const widgetHTML = `
                 
                 <div id="common-messages-list" class="messages-list"></div>
                 
-                <div class="conversation-chat create-dialog-chat">
-                    <div class="chat__conversation-input-wrap">
-                        <input id="message-input" class="chat__conversation-input" type="text" placeholder="Type a reply..."/>
-                        
-                        <div class="chat__conversation-input-controls">
-                            <div class="toggle-emoji-picker-button">
-                                ${smileIcon}                        
-                            </div>
-                            <div>
-                                ${scrapIcon}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                ${chatConversationInput('message-input')}
             </div>
             
             <!--CONVERSATIONS-->

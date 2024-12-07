@@ -487,7 +487,7 @@
   font-weight: 400;
   color: #363538;
 }
-#chat-widget__wrap .conversation-chat .chat__conversation-input-wrap {
+#chat-widget__wrap .chat__conversation-input-wrap {
   width: 100%;
   display: flex;
   align-items: center;
@@ -497,7 +497,7 @@
   border-top: 1px solid #ebebeb;
   background: #ffffff;
 }
-#chat-widget__wrap .conversation-chat .chat__conversation-input-wrap .chat__conversation-input {
+#chat-widget__wrap .chat__conversation-input-wrap .chat__conversation-input {
   width: 100%;
   height: 66px;
   border: none;
@@ -506,21 +506,24 @@
   font-weight: 400;
   padding: 0 20px;
 }
-#chat-widget__wrap .conversation-chat .chat__conversation-input-wrap .chat__conversation-input::placeholder {
+#chat-widget__wrap .chat__conversation-input-wrap .chat__conversation-input::placeholder {
   color: #667085;
 }
-#chat-widget__wrap .conversation-chat .chat__conversation-input-wrap .chat__conversation-input-controls {
+#chat-widget__wrap .chat__conversation-input-wrap .chat__conversation-input-controls {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-right: 20px;
   position: relative;
 }
-#chat-widget__wrap .conversation-chat .chat__conversation-input-wrap .chat__conversation-input-controls svg {
+#chat-widget__wrap .chat__conversation-input-wrap .chat__conversation-input-controls svg {
   cursor: pointer;
 }
 #chat-widget__wrap #ask-question__messages-list {
-  height: 354px;
+  max-height: 354px;
+}
+#chat-widget__wrap #common-messages-list {
+  max-height: 493px;
 }
 #chat-widget__wrap .messages-list {
   padding: 20px;
@@ -535,6 +538,22 @@
   display: flex;
   align-items: flex-end;
   gap: 10px;
+}
+#chat-widget__wrap .messages-list .message__inner-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+#chat-widget__wrap .messages-list .message__inner-wrap .message__time {
+  font-size: 13px;
+  font-weight: 400;
+  color: #667085;
+}
+#chat-widget__wrap .messages-list .message__inner-wrap .message__time.user-message {
+  align-self: flex-end;
+}
+#chat-widget__wrap .messages-list .message__inner-wrap .message__time.admin-message {
+  align-self: flex-start;
 }
 #chat-widget__wrap .messages-list .message {
   display: flex;

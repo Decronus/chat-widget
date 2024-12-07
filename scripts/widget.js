@@ -1,198 +1,264 @@
 import { rightArrow, unreadIcon } from './components/icons';
-import { widgetHTML } from './widgetHTML';
-
 import { getLead, getSupportConversationsList, getSupportMessagesList, setEmail, createConversation, sendMessage } from './fetches';
 import { getTime } from './utils';
-
-const { robotAvatar } = () => import('./components/robotAvatar');
 import { enterEmailBlock } from './components/enterEmailBlock';
-import connectWebSocket from './websocket';
 import { askQuestionFirstMessage } from './components/askQuestionFirstMessage';
-import { createEmojiPicker } from './emojiPicker';
+import { closeEmojiPicker, createEmojiPicker } from './emojiPicker';
+import { initChatVisibilityMethods } from './methods/chatVisibility';
+import { clearConversationsData } from './methods/clearConversationsData';
+import { initComponents } from './methods/initComponents';
+import {
+    conversationsList,
+    commonMessagesList,
+    conversationsPage,
+    conversationPage,
+    mainPage,
+    askQuestionPage,
+    askQuestionMessagesList,
+    messageInput,
+    askQuestionInput,
+} from './methods/initComponents';
+import connectWebSocket from './websocket';
+import Cookie from 'js-cookie';
+import { clearChatConversationInput } from './methods/clearChatConversationInput';
+import { conversationsNotFound } from './components/conversationsNotFound';
 
-connectWebSocket();
-
-const userAgent = navigator.userAgent;
-const ip = '127.0.0.1';
-const token = appConfig.token;
-
-// void getLead({ user_agent: userAgent, ip, token, get_params: {} });
-// void setEmail({ user_agent: userAgent, ip, token, email: 'zick3333@mail.ru' });
+///// VARIABLES /////
+export const userAgent = navigator.userAgent;
+export const ip = '127.0.0.1';
+export const token = appConfig.token;
 
 ///// DATA /////
+export let leadData = null;
 export let currentConversationUUID = null;
 export let messages = [];
 export let conversations = [];
 export let conversationsPages = {};
+export let messagesPages = {};
 export let currentConversationsPage = 1;
+export let currentMessagesPage = 1;
 
-///// MAIN /////
-const body = document.body;
-
-let widgetWrap;
-let chat;
-
-let showChatButton;
-let closeChatButton;
-let askQuestionButton;
-
-let bottomPanelHomeButtons;
-let bottomPanelMessageButtons;
-
-let closeConversationAndOpenConversationListButton;
-let closeAskQuestionAndOpenMessagesButton;
-
-let conversationsList;
-let conversationsBlock;
-
-let questionsList;
-
-let mainPage;
-let conversationPage;
-let askQuestionPage;
-let conversationsPage;
-
-let askQuestionMessagesList;
-let messagesList;
-let askQuestionInput;
-let messageInput;
-
-async function showChat() {
-    chat.classList.remove('is-hidden');
-    if (showChatButton) showChatButton.style.display = 'none';
-    if (closeChatButton) closeChatButton.style.display = 'flex';
-}
-
-function closeChat() {
-    chat.classList.add('is-hidden');
-    if (showChatButton) showChatButton.style.display = 'flex';
-    if (closeChatButton) closeChatButton.style.display = 'none';
-}
-
-function renderConversationsList() {
+export function renderConversationsList() {
     conversationsList.innerHTML = '';
+    if (!conversations.length) {
+        conversationsList.insertAdjacentHTML('beforeend', conversationsNotFound);
+        const askQuestionLink = document.querySelector('.conversations-list__ask-question-link');
+        askQuestionLink.addEventListener('click', openAskQuestionPage);
+        return;
+    }
     conversations.forEach(conversation => {
         const conversationItem = document.createElement('div');
 
         conversationItem.addEventListener('click', async () => {
             currentConversationUUID = conversation.uuid;
-            openConversationPage();
-            messagesList.insertAdjacentHTML('beforeend', "<div class='loader'/>");
-            await getSupportMessagesList(conversation.uuid);
-            renderMessagesList(conversation.uuid);
+            void openConversationPage();
         });
 
         conversationItem.classList.add('conversation-list-item');
         conversationItem.innerHTML = `
             <div class="conversation-data">
                 <p class="conversation-last-message">${conversation.last_message}</p>
-                <p class="conversation-info">${conversation.subject} • ${getTime(conversation.last_message_at_timestamp)}</p>
+                <p class="conversation-info">${conversation.subject} • ${conversation.last_message_at}</p>
             </div>
             ${conversation.is_read ? rightArrow : unreadIcon}
         `;
         conversationsList.appendChild(conversationItem);
     });
+
+    // conversationsList.addEventListener('scroll', handleConversationsScroll);
 }
+
+const handleMessagesScroll = updateMessagesListOnScroll();
 
 function renderMessagesList() {
-    messagesList.innerHTML = '';
+    const messageClassMap = {
+        user_message: 'user-message',
+        admin_message: 'admin-message',
+        divider: 'divider',
+    };
+    commonMessagesList.innerHTML = '';
     messages.forEach(message => {
-        const messageItem = document.createElement('div');
+        let messageTemplate = '';
         if (message.type === 'divider') {
-            messageItem.classList.add('divider');
-            messageItem.innerHTML = message.value;
-        } else if (message.type === 'user_message') {
-            messageItem.classList.add('message', 'user-message');
-            messageItem.innerHTML = message.message;
-        } else if (message.type === 'admin_message') {
-            messageItem.classList.add('message', 'admin-message');
-            messageItem.innerHTML = message.message;
+            messageTemplate = `<div class="divider">${message.value}</div>`;
+        } else {
+            messageTemplate = `
+                <div class="message__inner-wrap">
+                    <div class="message ${messageClassMap[message.type]}">${message.message}</div>
+                    <span class="message__time ${messageClassMap[message.type]}">${message.created_time}</span>
+                </div>`;
         }
-        messagesList.appendChild(messageItem);
+        commonMessagesList.insertAdjacentHTML('beforeend', messageTemplate);
     });
+    commonMessagesList.addEventListener('scroll', handleMessagesScroll);
 }
 
-function openMainPage() {
+export function openMainPage() {
     conversationsPage.classList.add('is-hidden');
     mainPage.classList.remove('is-hidden');
 }
 
-function clearConversationsData() {
-    currentConversationsPage = 1;
-    conversations = [];
-    conversationsPages = {};
-    conversationsList.innerHTML = '';
-    conversationsList.insertAdjacentHTML('beforeend', "<div class='loader' style='margin-top: 24px'/>");
-}
+export const handleConversationsScroll = updateConversationsListOnScroll();
 
-async function openConversationsPage() {
+export async function openConversationsPage() {
     mainPage.classList.add('is-hidden');
     conversationsPage.classList.remove('is-hidden');
     clearConversationsData();
-    await getSupportConversationsList();
+    await getSupportConversationsList(currentConversationsPage);
     renderConversationsList();
-    conversationsList.addEventListener('scroll', updateConversationsListOnScroll);
+    conversationsList.addEventListener('scroll', handleConversationsScroll);
 }
 
-async function updateConversationsListOnScroll() {
-    if (conversationsList.scrollTop + conversationsList.clientHeight >= conversationsList.scrollHeight) {
-        if (currentConversationsPage >= conversationsPages.page_quantity) {
-            conversationsList.removeEventListener('scroll', updateConversationsListOnScroll);
-            return;
+export function updateConversationsListOnScroll() {
+    let isPageLoading = false;
+
+    return async function () {
+        if (isPageLoading) return;
+        if (conversationsList.clientHeight < 50) return;
+
+        if (conversationsList.scrollTop + conversationsList.clientHeight >= conversationsList.scrollHeight - 50) {
+            if (currentConversationsPage >= conversationsPages.page_quantity) {
+                conversationsList.removeEventListener('scroll', handleConversationsScroll);
+                return;
+            }
+
+            isPageLoading = true;
+            conversationsList.insertAdjacentHTML('beforeend', '<div class="loader" style="margin-top: 24px;"/>');
+
+            try {
+                await getSupportConversationsList(++currentConversationsPage);
+                renderConversationsList();
+            } catch (e) {
+                console.error(e);
+            } finally {
+                isPageLoading = false;
+            }
         }
-        conversationsList.insertAdjacentHTML('beforeend', '<div class="loader" style="margin-top: 24px;"/>');
-        await getSupportConversationsList(++currentConversationsPage);
-        renderConversationsList();
-    }
+    };
 }
 
-async function closeConversationAndOpenConversationList() {
-    currentConversationUUID = null;
+export function updateMessagesListOnScroll() {
+    let isPageLoading = false;
+
+    return async function () {
+        if (isPageLoading) return;
+        if (commonMessagesList.clientHeight < 50) return;
+
+        if (commonMessagesList.scrollTop < 50) {
+            if (currentMessagesPage >= messagesPages.page_quantity) {
+                commonMessagesList.removeEventListener('scroll', handleMessagesScroll);
+                return;
+            }
+            isPageLoading = true;
+            commonMessagesList.insertAdjacentHTML('afterbegin', '<div class="loader" style="margin-top: 24px;"/>');
+
+            try {
+                await getSupportMessagesList(++currentMessagesPage);
+                renderMessagesList();
+            } catch (e) {
+                console.error(e);
+            } finally {
+                isPageLoading = false;
+            }
+        }
+    };
+}
+
+export async function closeConversationAndOpenConversationsList() {
+    clearChatConversationInput();
+    closeEmojiPicker();
+    currentMessagesPage = 1;
+    clearConversationsData();
     conversationPage.classList.add('is-hidden');
     conversationsPage.classList.remove('is-hidden');
-    clearConversationsData();
     await getSupportConversationsList();
     renderConversationsList();
+    // conversationsList.addEventListener('scroll', handleConversationsScroll);
 }
 
-async function closeAskQuestionAndOpenConversationsPage() {
+export async function closeAskQuestionAndOpenConversationsPage() {
+    clearChatConversationInput();
+    closeEmojiPicker();
+    clearConversationsData();
     askQuestionPage.classList.add('is-hidden');
     conversationsPage.classList.remove('is-hidden');
     askQuestionMessagesList.innerHTML = '';
-    clearConversationsData();
     await getSupportConversationsList();
     renderConversationsList();
 }
 
-function openAskQuestionPage() {
+// export async function closeConversationsPageAndOpenAskQuestion() {
+//     clearConversationsData();
+//     conversationsPage.classList.add('is-hidden');
+//     askQuestionPage.classList.remove('is-hidden');
+//     askQuestionMessagesList.innerHTML = '';
+//     await getSupportConversationsList();
+//     renderConversationsList();
+// }
+
+export function openAskQuestionPage() {
+    clearConversationsData();
     askQuestionPage.classList.remove('is-hidden');
     mainPage.classList.add('is-hidden');
+    conversationsPage.classList.add('is-hidden');
+    askQuestionMessagesList.innerHTML = '';
     askQuestionMessagesList.insertAdjacentHTML('beforeend', askQuestionFirstMessage);
+    currentConversationUUID = null;
 }
 
-function closeAskQuestionPage() {
-    askQuestionPage.classList.add('is-hidden');
-    mainPage.classList.remove('is-hidden');
-}
+// function closeAskQuestionPage() {
+//     askQuestionPage.classList.add('is-hidden');
+//     mainPage.classList.remove('is-hidden');
+// }
 
-function openConversationPage() {
+async function openConversationPage() {
+    conversationsList.addEventListener('scroll', handleConversationsScroll);
     conversationsPage.classList.add('is-hidden');
     conversationPage.classList.remove('is-hidden');
-    messagesList.innerHTML = '';
+    currentMessagesPage = 1;
+    commonMessagesList.innerHTML = '';
     messages = [];
+    commonMessagesList.insertAdjacentHTML('beforeend', "<div class='loader'/>");
+    await getSupportMessagesList(currentMessagesPage);
+    renderMessagesList();
+    commonMessagesList.scrollTop = commonMessagesList.scrollHeight;
 }
 
-function closeConversationPage() {
-    conversationPage.classList.add('is-hidden');
-    mainPage.classList.remove('is-hidden');
+// function closeConversationPage() {
+//     conversationPage.classList.add('is-hidden');
+//     mainPage.classList.remove('is-hidden');
+// }
+
+export function renderMessage({ message, type, created_time }, list) {
+    const typeMap = {
+        user_message: 'user-message',
+        admin_message: 'admin-message',
+    };
+    const messageEl = `
+        <div class="message__inner-wrap">
+            <div class="message ${typeMap[type]}">${message}</div>
+            <span class="message__time ${typeMap[type]}">${created_time}</span>
+        </div>`;
+    list.insertAdjacentHTML('beforeend', messageEl);
+    list.scrollTop = list.scrollHeight;
 }
 
-async function handleCreateConversation(e) {
+export function handleAskQuestion(e) {
+    if (!currentConversationUUID) {
+        void handleCreateConversation(e);
+    } else {
+        void handleSendMessage(e, askQuestionMessagesList);
+    }
+}
+
+export async function handleCreateConversation(e) {
     try {
         if (e.key === 'Enter') {
-            const value = askQuestionInput.value;
+            const value = e.target.value;
+            e.target.value = '';
             if (!value) return;
-            await createConversation({
+            closeEmojiPicker();
+            const { conversation, message } = await createConversation({
                 subject: value,
                 message: value,
                 files: [],
@@ -200,35 +266,37 @@ async function handleCreateConversation(e) {
                 ip,
                 token,
             });
+            currentConversationUUID = conversation.uuid;
 
-            askQuestionInput.value = '';
-            const messagesList = document.querySelector('.messages-list');
-            const messageItem = document.createElement('div');
-            messageItem.classList.add('message', 'user-message');
-            messageItem.innerHTML = value;
-            messagesList.appendChild(messageItem);
+            // renderMessage(message, askQuestionMessagesList);
 
             if (!window.appConfig.email) {
-                setTimeout(() => {
-                    messagesList.insertAdjacentHTML('beforeend', enterEmailBlock);
-                    const enterEmailInput = document.getElementById('enter-email-input');
-                    const sendButton = document.querySelector('.input-block__send-button');
-                    sendButton.addEventListener('click', async () => {
-                        const email = enterEmailInput.value;
-                        if (!email) return;
-                        const error = document.querySelector('.input-block__error');
-                        try {
-                            await setEmail({ user_agent: userAgent, ip, token, email });
-                            window.appConfig.email = email;
-                            enterEmailInput.setAttribute('disabled', 'true');
-                            sendButton.style.display = 'none';
-                            error.classList.add('is-hidden');
-                        } catch (e) {
-                            error.textContent = e.response.data.message;
-                            error.classList.remove('is-hidden');
-                        }
-                    });
-                }, 1000);
+                const chatConversationInputWrap = document.querySelectorAll('.chat__conversation-input-wrap');
+                chatConversationInputWrap.forEach(el => (el.style.visibility = 'hidden'));
+
+                // Ввод email
+                askQuestionMessagesList.insertAdjacentHTML('beforeend', enterEmailBlock);
+                const enterEmailInput = document.getElementById('enter-email-input');
+                const sendButton = document.querySelector('.input-block__send-button');
+
+                sendButton.addEventListener('click', async () => {
+                    const email = enterEmailInput.value;
+                    if (!email) return;
+                    const error = document.querySelector('.input-block__error');
+
+                    try {
+                        await setEmail({ user_agent: userAgent, ip, token, email });
+                        window.appConfig.email = email;
+                        enterEmailInput.setAttribute('disabled', 'true');
+                        sendButton.style.display = 'none';
+                        error.classList.add('is-hidden');
+
+                        chatConversationInputWrap.forEach(el => (el.style.visibility = 'visible'));
+                    } catch (e) {
+                        error.textContent = e.response.data.message;
+                        error.classList.remove('is-hidden');
+                    }
+                });
             }
         }
     } catch (e) {
@@ -236,67 +304,36 @@ async function handleCreateConversation(e) {
     }
 }
 
-async function handleSendMessage(e) {
+export async function handleSendMessage(e, list) {
+    if (!currentConversationUUID) return;
     try {
         if (e.key === 'Enter') {
-            const value = messageInput.value;
+            const value = e.target.value;
+            e.target.value = '';
             if (!value) return;
-            await sendMessage({ message: value, files: [], user_agent: userAgent, ip, token });
-            messageInput.value = '';
+            closeEmojiPicker();
+            const { message } = await sendMessage({ message: value, files: [] });
+
+            // renderMessage(message, list);
         }
     } catch (e) {
         console.error(e);
     }
 }
 
-function initWidget() {
-    body.innerHTML = widgetHTML;
+async function initWidget() {
+    initComponents();
+    initChatVisibilityMethods();
+    connectWebSocket();
+    createEmojiPicker();
+    Cookie.set('token', window.appConfig.token);
 
-    widgetWrap = document.getElementById('chat-widget__wrap');
-    chat = widgetWrap?.querySelector('.chat');
-
-    showChatButton = widgetWrap?.querySelector('.show-chat-button');
-    showChatButton.addEventListener('click', showChat);
-
-    closeChatButton = widgetWrap?.querySelector('.close-chat-button');
-    closeChatButton.addEventListener('click', closeChat);
-
-    bottomPanelHomeButtons = widgetWrap?.querySelectorAll('.bottom-panel__home-button');
-    bottomPanelHomeButtons?.forEach(el => el?.addEventListener('click', openMainPage));
-
-    bottomPanelMessageButtons = widgetWrap?.querySelectorAll('.bottom-panel__messages-button');
-    bottomPanelMessageButtons?.forEach(el => el?.addEventListener('click', openConversationsPage));
-
-    askQuestionButton = widgetWrap?.querySelector('.ask-question');
-    askQuestionButton?.addEventListener('click', openAskQuestionPage);
-
-    closeConversationAndOpenConversationListButton = widgetWrap?.querySelector('.close-conversation-and-open-conversation-list__button');
-    closeConversationAndOpenConversationListButton?.addEventListener('click', closeConversationAndOpenConversationList);
-
-    closeAskQuestionAndOpenMessagesButton = widgetWrap?.querySelector('.chat__ask-question-back');
-    closeAskQuestionAndOpenMessagesButton?.addEventListener('click', closeAskQuestionAndOpenConversationsPage);
-
-    conversationsBlock = widgetWrap?.querySelector('.chat__conversations-block');
-    conversationsList = widgetWrap?.querySelector('.conversations-list');
-
-    questionsList = widgetWrap?.querySelector('.chat__questions-list');
-
-    mainPage = widgetWrap?.querySelector('.chat__main');
-    conversationPage = widgetWrap?.querySelector('.chat__conversation');
-    askQuestionPage = widgetWrap?.querySelector('.chat__ask-question');
-    conversationsPage = widgetWrap?.querySelector('.chat__messages');
-
-    askQuestionMessagesList = widgetWrap?.querySelector('#ask-question__messages-list');
-    messagesList = widgetWrap?.querySelector('#common-messages-list');
-
-    askQuestionInput = widgetWrap?.querySelector('#ask-question__input');
-    askQuestionInput?.addEventListener('keydown', handleCreateConversation);
-
-    messageInput = widgetWrap?.querySelector('#message-input');
-    messageInput?.addEventListener('keydown', handleSendMessage);
+    try {
+        leadData = await getLead();
+        console.log('leadData', leadData);
+    } catch (e) {
+        console.error(e);
+    }
 }
 
-window.addEventListener('DOMContentLoaded', async () => {
-    initWidget();
-    createEmojiPicker();
-});
+window.addEventListener('DOMContentLoaded', initWidget);

@@ -1,7 +1,8 @@
-import { currentConversationUUID, messages, conversations } from './widget';
+import { currentConversationUUID, messages, conversations, renderConversationsList, renderMessage } from './widget';
+import { askQuestionMessagesList, commonMessagesList } from './methods/initComponents';
 
 export default function connectWebsocket() {
-    const socket = new WebSocket(`wss://panel.makeyourpanel.com/ws/users/support_chat?token=${window.appConfig.token}`);
+    const socket = new WebSocket(`wss://panel.makeyourpanel.com/ws/user/support_chat?token=${window.appConfig.token}`);
 
     // Событие при подключении
     socket.onopen = () => {
@@ -48,6 +49,7 @@ export default function connectWebsocket() {
         const index = conversations.findIndex(el => el.uuid === conversation.uuid);
         if (index === -1) return;
         conversations.splice(index, 1, conversation);
+        renderConversationsList();
     }
 
     function handleNewMessage({ message, conversation }) {
@@ -55,10 +57,14 @@ export default function connectWebsocket() {
 
         if (conversation.uuid !== currentConversationUUID) return;
         if (messages) messages.push(message);
+        renderMessage(message, askQuestionMessagesList);
+        renderMessage(message, commonMessagesList);
     }
 
-    function handleCreateConversation({ conversation }) {
-        if (conversations) conversations.unshift(conversation);
+    function handleCreateConversation({ message, conversation }) {
+        if (conversations.length) conversations.unshift(conversation);
+        renderConversationsList();
+        renderMessage(message, askQuestionMessagesList);
     }
 
     function handleEditConversation({ conversation }) {

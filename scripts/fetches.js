@@ -1,16 +1,19 @@
 import axios from 'axios';
 import { baseURL, support } from './endpoints.js';
-import { currentConversationUUID, messages, conversations, conversationsPages } from './widget';
+import { currentConversationUUID, messages, conversations, conversationsPages, messagesPages, leadData } from './widget';
+import { userAgent, ip, token } from './widget';
 
 const instance = axios.create({
     baseURL,
+    withCredentials: true,
 });
 
-export async function getLead({ user_agent, ip, token, get_params }) {
+export async function getLead() {
     try {
-        const body = { user_agent, ip, token, get_params };
-        const { payloads } = await instance.post(support.getLead, body);
-        return payloads;
+        const body = { user_agent: userAgent, ip, token: window.appConfig.token, get_params: {} };
+        const { data } = await instance.post(support.getLead, body);
+        leadData = data.payloads.data;
+        return data.payloads.data;
     } catch (e) {
         console.error('e', e);
     }
@@ -27,18 +30,18 @@ export async function getSupportConversationsList(page) {
     }
 }
 
-export async function getSupportMessagesList(uuid) {
+export async function getSupportMessagesList(page) {
     try {
-        currentConversationUUID = uuid;
         const { data } = await instance.get(
             support.messageList({
                 token: appConfig.token,
-                conversation_uuid: uuid,
-                page: 1,
+                conversation_uuid: currentConversationUUID,
+                page,
                 row_per_page: 20,
             })
         );
-        messages.push(...data.payloads.data);
+        messages.unshift(...data.payloads.data);
+        messagesPages = data.payloads.pages;
         return messages;
     } catch (e) {
         console.log('e', e);
@@ -55,9 +58,9 @@ export async function setEmail({ user_agent, ip, token, email }) {
     }
 }
 
-export async function createConversation({ subject, message, user_agent, ip, files, token }) {
+export async function createConversation({ subject, message, files }) {
     try {
-        const body = { subject, message, user_agent, ip, files, token };
+        const body = { subject, message, files, user_agent: userAgent, ip, token: window.appConfig.token };
         const { data } = await instance.post(support.conversationNew, body);
         return data.payloads;
     } catch (e) {
@@ -65,12 +68,12 @@ export async function createConversation({ subject, message, user_agent, ip, fil
     }
 }
 
-export async function sendMessage({ message, files, user_agent, ip }) {
+export async function sendMessage({ message, files }) {
     try {
         const body = {
             message,
             files,
-            user_agent,
+            user_agent: userAgent,
             ip,
             token: appConfig.token,
             conversation_uuid: currentConversationUUID,
