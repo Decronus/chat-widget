@@ -181,6 +181,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  position: relative;
 }
 #chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block.is-hidden {
   display: none;

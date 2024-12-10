@@ -191,6 +191,7 @@
   flex-grow: 1;
   overflow: auto;
   max-height: 300px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -424,6 +425,14 @@
   height: 485px;
   width: 100%;
 }
+#chat-widget__wrap .conversations-list .conversations-list__empty {
+  margin-top: 24px;
+}
+#chat-widget__wrap .conversations-list .conversations-list__empty p {
+  color: #667085;
+  font-size: 12px;
+  text-align: center;
+}
 #chat-widget__wrap .conversations-list .conversation-list-item {
   display: flex;
   justify-content: space-between;
@@ -521,9 +530,11 @@
 }
 #chat-widget__wrap #ask-question__messages-list {
   max-height: 354px;
+  height: 100%;
 }
 #chat-widget__wrap #common-messages-list {
   max-height: 493px;
+  height: 100%;
 }
 #chat-widget__wrap .messages-list {
   padding: 20px;
@@ -651,6 +662,15 @@
   100% {
     transform: rotate(1turn);
   }
+}
+#chat-widget__wrap .link {
+  color: #5c59e8;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+#chat-widget__wrap .link:hover {
+  color: #726ff8;
 }
 
 /*# sourceMappingURL=widget.css.map */

@@ -233,6 +233,7 @@
                         flex-direction: column;
                         justify-content: space-between;
                         height: 100%;
+                        position: relative;
 
                         &.is-hidden {
                             display: none;
@@ -595,6 +596,7 @@
         }
     }
 
+    ///// BOTTOM PANEL /////
     .bottom-panel__wrap {
         position: absolute;
         left: 0;
