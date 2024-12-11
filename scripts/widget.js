@@ -6,7 +6,7 @@ import { askQuestionFirstMessage } from './components/askQuestionFirstMessage';
 import { closeEmojiPicker, createEmojiPicker } from './emojiPicker';
 import { initChatVisibilityMethods } from './methods/chatVisibility';
 import { clearConversationsData } from './methods/clearConversationsData';
-import { initComponents } from './methods/initComponents';
+import { bottomPanelHomeButtons, bottomPanelMessageButtons, initComponents } from './methods/initComponents';
 import {
     conversationsList,
     commonMessagesList,
@@ -22,6 +22,7 @@ import connectWebSocket from './websocket';
 import Cookie from 'js-cookie';
 import { clearChatConversationInput } from './methods/clearChatConversationInput';
 import { conversationsNotFound } from './components/conversationsNotFound';
+import { initBottomPanel } from './methods/initBottomPanel';
 
 ///// VARIABLES /////
 export const userAgent = navigator.userAgent;
@@ -70,7 +71,7 @@ export function renderConversationsList() {
 
 const handleMessagesScroll = updateMessagesListOnScroll();
 
-function renderMessagesList() {
+export function renderMessagesList() {
     const messageClassMap = {
         user_message: 'user-message',
         admin_message: 'admin-message',
@@ -96,17 +97,25 @@ function renderMessagesList() {
 export function openMainPage() {
     conversationsPage.classList.add('is-hidden');
     mainPage.classList.remove('is-hidden');
+    bottomPanelHomeButtons.forEach(el => el.classList.add('active'));
+    bottomPanelMessageButtons.forEach(el => el.classList.remove('active'));
 }
 
 export const handleConversationsScroll = updateConversationsListOnScroll();
 
 export async function openConversationsPage() {
+    if (!conversationsPage.classList.contains('is-hidden')) return;
+
     mainPage.classList.add('is-hidden');
     conversationsPage.classList.remove('is-hidden');
+    bottomPanelHomeButtons.forEach(el => el.classList.remove('active'));
+    bottomPanelMessageButtons.forEach(el => el.classList.add('active'));
+
     clearConversationsData();
     await getSupportConversationsList(currentConversationsPage);
     renderConversationsList();
     conversationsList.addEventListener('scroll', handleConversationsScroll);
+    console.log('openConversationsPage');
 }
 
 export function updateConversationsListOnScroll() {
@@ -323,6 +332,7 @@ export async function handleSendMessage(e, list) {
 
 async function initWidget() {
     initComponents();
+
     initChatVisibilityMethods();
     connectWebSocket();
     createEmojiPicker();

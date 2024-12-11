@@ -22,9 +22,8 @@ export const widgetHTML = `
                 <div class="chat__body">
                     <div class="chat__body-overlay"></div>
     
-                    <div class="chat__conversations-block">
+                    <div class="chat__ask-question-block">
                         <div class="chat__conversations-list"></div>
-                        
                         
                         <div class="button ask-question" 
                             style="left: 50%;
@@ -41,18 +40,7 @@ export const widgetHTML = `
                             Ask a question
                         </div>
                                              
-                        <div class="bottom-panel__wrap">                        
-                            <div class="bottom-panel">
-                                <div class="bottom-panel__cell bottom-panel__home-button active">
-                                    ${homeIcon}
-                                    <p class="bottom-panel__cell-text">Home</p>
-                                </div>
-                                <div class="bottom-panel__cell bottom-panel__messages-button">
-                                    ${messageIcon}
-                                    <p class="bottom-panel__cell-text">Conversations</p>
-                                </div>
-                            </div>
-                         </div>
+                      
                     </div>   
                 </div>
             </div>
@@ -112,18 +100,7 @@ export const widgetHTML = `
                     <div class="loader"></div>
                 </div>
                              
-                <div class="bottom-panel__wrap">
-                    <div class="bottom-panel bottom-panel__home-button">
-                        <div class="bottom-panel__cell">
-                            ${homeIcon}
-                            <p class="bottom-panel__cell-text">Home</p>
-                        </div>
-                        <div class="bottom-panel__cell bottom-panel__messages-button active">
-                            ${messageIcon}
-                            <p class="bottom-panel__cell-text">Conversations</p>
-                        </div>
-                    </div>
-                </div>
+              
             </div>
         </div>
      

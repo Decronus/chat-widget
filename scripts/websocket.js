@@ -1,4 +1,4 @@
-import { currentConversationUUID, messages, conversations, renderConversationsList, renderMessage } from './widget';
+import { currentConversationUUID, messages, conversations, renderConversationsList, renderMessage, renderMessagesList } from './widget';
 import { askQuestionMessagesList, commonMessagesList } from './methods/initComponents';
 
 export default function connectWebsocket() {
@@ -76,9 +76,10 @@ export default function connectWebsocket() {
 
         if (conversation.uuid !== currentConversationUUID) return;
         if (messages) {
-            const index = messages.data.findIndex(el => el.id === delete_message.id);
+            const index = messages.findIndex(el => el.id === delete_message.id);
             if (index === -1) return;
-            messages.data.splice(index, 1, message);
+            messages.splice(index, 1, message);
+            renderMessagesList();
         }
     }
 }

@@ -226,7 +226,7 @@
                         }
                     }
 
-                    .chat__conversations-block {
+                    .chat__ask-question-block {
                         padding: 12px 15px;
                         width: 100%;
                         display: flex;
@@ -449,6 +449,10 @@
                 height: 100%;
                 position: relative;
 
+                &.is-hidden {
+                    display: none;
+                }
+
                 .chat__messages-button {
                     background: $main-color;
                     padding: 0 20px;
@@ -470,10 +474,6 @@
                     &:hover {
                         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
                     }
-                }
-
-                &.is-hidden {
-                    display: none;
                 }
 
                 .chat__messages-header {

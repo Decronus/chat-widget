@@ -174,7 +174,7 @@
   font-size: 14px;
   cursor: pointer;
 }
-#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__ask-question-block {
   padding: 12px 15px;
   width: 100%;
   display: flex;
@@ -183,10 +183,10 @@
   height: 100%;
   position: relative;
 }
-#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block.is-hidden {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__ask-question-block.is-hidden {
   display: none;
 }
-#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__ask-question-block .chat__conversations-list {
   margin-top: 67px;
   margin-bottom: 24px;
   flex-grow: 1;
@@ -197,27 +197,27 @@
   flex-direction: column;
   gap: 16px;
 }
-#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list > div {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__ask-question-block .chat__conversations-list > div {
   border-bottom: 1px solid #f2f2f2;
   padding-bottom: 16px;
 }
-#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__ask-question-block .chat__conversations-list .chat__conversations-list-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
 }
-#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__ask-question-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 4px;
 }
-#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data .chat__conversations-last-message {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__ask-question-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data .chat__conversations-last-message {
   font-size: 15px;
   font-weight: 400;
 }
-#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__conversations-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data .chat__conversations-info {
+#chat-widget__wrap .chat-widget .chat .chat__main .chat__body .chat__ask-question-block .chat__conversations-list .chat__conversations-list-item .chat__conversations-data .chat__conversations-info {
   font-size: 15px;
   font-weight: 400;
   color: #667085;
@@ -334,6 +334,9 @@
   height: 100%;
   position: relative;
 }
+#chat-widget__wrap .chat-widget .chat .chat__messages.is-hidden {
+  display: none;
+}
 #chat-widget__wrap .chat-widget .chat .chat__messages .chat__messages-button {
   background: #5c59e8;
   padding: 0 20px;
@@ -354,9 +357,6 @@
 }
 #chat-widget__wrap .chat-widget .chat .chat__messages .chat__messages-button:hover {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-}
-#chat-widget__wrap .chat-widget .chat .chat__messages.is-hidden {
-  display: none;
 }
 #chat-widget__wrap .chat-widget .chat .chat__messages .chat__messages-header {
   height: 74px;

@@ -8,6 +8,7 @@ import {
     openMainPage,
     handleAskQuestion,
 } from '../widget';
+import { initBottomPanel } from './initBottomPanel';
 
 export const body = document.body;
 
@@ -23,7 +24,7 @@ export let closeConversationAndOpenConversationsListButton;
 export let closeAskQuestionAndOpenMessagesButton;
 
 export let conversationsList;
-export let conversationsBlock;
+export let askQuestionBlock;
 
 export let questionsList;
 
@@ -45,11 +46,9 @@ export function initComponents() {
     widgetWrap = document.getElementById('chat-widget__wrap');
     chat = widgetWrap?.querySelector('.chat');
 
-    bottomPanelHomeButtons = widgetWrap?.querySelectorAll('.bottom-panel__home-button');
-    bottomPanelHomeButtons?.forEach(el => el?.addEventListener('click', openMainPage));
-
-    bottomPanelMessageButtons = widgetWrap?.querySelectorAll('.bottom-panel__messages-button');
-    bottomPanelMessageButtons?.forEach(el => el?.addEventListener('click', openConversationsPage));
+    askQuestionBlock = widgetWrap?.querySelector('.chat__ask-question-block');
+    conversationsPage = widgetWrap?.querySelector('.chat__messages');
+    initBottomPanel();
 
     askQuestionButton = widgetWrap?.querySelector('.ask-question');
     askQuestionButton?.addEventListener('click', openAskQuestionPage);
@@ -60,7 +59,6 @@ export function initComponents() {
     closeAskQuestionAndOpenMessagesButton = widgetWrap?.querySelector('.chat__ask-question-back');
     closeAskQuestionAndOpenMessagesButton?.addEventListener('click', closeAskQuestionAndOpenConversationsPage);
 
-    conversationsBlock = widgetWrap?.querySelector('.chat__conversations-block');
     conversationsList = widgetWrap?.querySelector('.conversations-list');
 
     questionsList = widgetWrap?.querySelector('.chat__questions-list');
@@ -68,7 +66,6 @@ export function initComponents() {
     mainPage = widgetWrap?.querySelector('.chat__main');
     conversationPage = widgetWrap?.querySelector('.chat__conversation');
     askQuestionPage = widgetWrap?.querySelector('.chat__ask-question');
-    conversationsPage = widgetWrap?.querySelector('.chat__messages');
 
     askQuestionMessagesList = widgetWrap?.querySelector('#ask-question__messages-list');
     commonMessagesList = widgetWrap?.querySelector('#common-messages-list');
