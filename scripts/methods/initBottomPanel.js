@@ -1,11 +1,7 @@
-import { conversationsPage, askQuestionBlock, bottomPanelHomeButtons, widgetWrap, bottomPanelMessageButtons } from './initComponents';
-import { bottomPanel } from '../components/bottomPanel';
+import { bottomPanelHomeButtons, widgetWrap, bottomPanelMessageButtons } from './initComponents';
 import { openConversationsPage, openMainPage } from '../widget';
 
 export function initBottomPanel() {
-    askQuestionBlock.insertAdjacentHTML('beforeend', bottomPanel);
-    conversationsPage.insertAdjacentHTML('beforeend', bottomPanel);
-
     bottomPanelHomeButtons = widgetWrap?.querySelectorAll('.bottom-panel__home-button');
     bottomPanelHomeButtons?.forEach(el => el?.addEventListener('click', openMainPage));
 

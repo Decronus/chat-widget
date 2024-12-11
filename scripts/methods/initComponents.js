@@ -77,4 +77,8 @@ export function initComponents() {
     messageInput?.addEventListener('keydown', e => handleSendMessage(e, commonMessagesList));
 
     conversationInput = widgetWrap?.querySelectorAll('.chat__conversation-input');
+
+    // const scrapIcon = widgetWrap?.querySelectorAll('.scrap-icon');
+    // const fileInput = widgetWrap?.querySelectorAll('.chat__conversation-input-file');
+    // scrapIcon?.addEventListener('click', () => fileInput.click());
 }

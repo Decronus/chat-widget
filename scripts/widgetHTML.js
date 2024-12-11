@@ -1,5 +1,6 @@
 import { leftArrow2, messageIcon, homeIcon } from './components/icons';
 import { chatConversationInput } from './components/chatConversationInput';
+import { bottomPanel } from './components/bottomPanel';
 
 export const widgetHTML = `
     <div id="chat-widget__wrap">
@@ -40,7 +41,7 @@ export const widgetHTML = `
                             Ask a question
                         </div>
                                              
-                      
+                        ${bottomPanel}
                     </div>   
                 </div>
             </div>
@@ -100,7 +101,7 @@ export const widgetHTML = `
                     <div class="loader"></div>
                 </div>
                              
-              
+                ${bottomPanel}
             </div>
         </div>
      
