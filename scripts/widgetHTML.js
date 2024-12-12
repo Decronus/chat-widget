@@ -1,11 +1,11 @@
-import { leftArrow2, messageIcon, homeIcon } from './components/icons';
+import { leftArrow2 } from './components/icons';
 import { chatConversationInput } from './components/chatConversationInput';
 import { bottomPanel } from './components/bottomPanel';
 
 export const widgetHTML = `
     <div id="chat-widget__wrap">
     <div class="chat-widget">
-        <div class="chat">
+        <div class="chat is-hidden">
         
             <!--MAIN-->
             <div class="chat__main">

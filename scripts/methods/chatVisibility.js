@@ -17,7 +17,6 @@ function closeChat() {
 
 export function initChatVisibilityMethods() {
     showChatButton = widgetWrap?.querySelector('.show-chat-button');
-    console.log('showChatButton', showChatButton);
     showChatButton.addEventListener('click', showChat);
 
     closeChatButton = widgetWrap?.querySelector('.close-chat-button');
