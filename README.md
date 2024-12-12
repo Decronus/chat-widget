@@ -21,6 +21,8 @@
 <script src="https://cdn.jsdelivr.net/gh/Decronus/chat-widget@main/dist/widget.bundle.js"></script>
 ```
 
+appConfig добавляем только для теста, в реальном проекте данные будут передаваться с сервера.
+
 2. В тег `<head>`:
 
 ```bash
